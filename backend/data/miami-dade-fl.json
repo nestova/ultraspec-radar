@@ -1,0 +1,989 @@
+{
+  "label": "Miami-Dade County, FL (pilot)",
+  "generated_at": "2026-09-10T12:00:00+00:00",
+  "note": "Synthetic pilot dataset. Replace with a licensed feed before production use.",
+  "anchors": [
+    {
+      "id": "anchor-1-1",
+      "address": "1200 North Bay Road",
+      "city": "Miami Beach",
+      "state": "FL",
+      "zip_code": "33139",
+      "lat": 25.7907,
+      "lon": -80.14,
+      "price": 18500000.0,
+      "status": "listed",
+      "year_built": 2024,
+      "builder": "Todd Michael Glaser",
+      "parcel_id": "02-3200-001-0010",
+      "listing_url": "https://www.example-mls.com/listing/anchor-1-1",
+      "provenance": {
+        "source": "miami-dade-permits+mls-feed",
+        "source_url": "https://www.miamidade.gov/permits",
+        "retrieved_at": "2026-08-27T12:00:00+00:00"
+      }
+    },
+    {
+      "id": "anchor-1-2",
+      "address": "1208 North Bay Road",
+      "city": "Miami Beach",
+      "state": "FL",
+      "zip_code": "33139",
+      "lat": 25.793173,
+      "lon": -80.137864,
+      "price": 22000000.0,
+      "status": "listed",
+      "year_built": 2025,
+      "builder": "Cassis Group",
+      "parcel_id": "02-3201-001-0010",
+      "listing_url": "https://www.example-mls.com/listing/anchor-1-2",
+      "provenance": {
+        "source": "miami-dade-permits+mls-feed",
+        "source_url": "https://www.miamidade.gov/permits",
+        "retrieved_at": "2026-09-03T12:00:00+00:00"
+      }
+    },
+    {
+      "id": "anchor-2-1",
+      "address": "1300 Leafy Way",
+      "city": "Coconut Grove",
+      "state": "FL",
+      "zip_code": "33133",
+      "lat": 25.7276,
+      "lon": -80.243,
+      "price": 22000000.0,
+      "status": "sold",
+      "year_built": 2024,
+      "builder": "Adam Ostrower Dev",
+      "parcel_id": "02-3210-001-0010",
+      "listing_url": "https://www.example-mls.com/listing/anchor-2-1",
+      "provenance": {
+        "source": "miami-dade-permits+mls-feed",
+        "source_url": "https://www.miamidade.gov/permits",
+        "retrieved_at": "2026-08-30T12:00:00+00:00"
+      }
+    },
+    {
+      "id": "anchor-2-2",
+      "address": "1308 Leafy Way",
+      "city": "Coconut Grove",
+      "state": "FL",
+      "zip_code": "33133",
+      "lat": 25.730073,
+      "lon": -80.240865,
+      "price": 15750000.0,
+      "status": "listed",
+      "year_built": 2025,
+      "builder": "Todd Michael Glaser",
+      "parcel_id": "02-3211-001-0010",
+      "listing_url": "https://www.example-mls.com/listing/anchor-2-2",
+      "provenance": {
+        "source": "miami-dade-permits+mls-feed",
+        "source_url": "https://www.miamidade.gov/permits",
+        "retrieved_at": "2026-08-30T12:00:00+00:00"
+      }
+    },
+    {
+      "id": "anchor-2-3",
+      "address": "1316 Leafy Way",
+      "city": "Coconut Grove",
+      "state": "FL",
+      "zip_code": "33133",
+      "lat": 25.732545,
+      "lon": -80.238731,
+      "price": 22000000.0,
+      "status": "listed",
+      "year_built": 2024,
+      "builder": "Adam Ostrower Dev",
+      "parcel_id": "02-3212-001-0010",
+      "listing_url": "https://www.example-mls.com/listing/anchor-2-3",
+      "provenance": {
+        "source": "miami-dade-permits+mls-feed",
+        "source_url": "https://www.miamidade.gov/permits",
+        "retrieved_at": "2026-09-06T12:00:00+00:00"
+      }
+    },
+    {
+      "id": "anchor-3-1",
+      "address": "1400 Bal Bay Drive",
+      "city": "Bal Harbour",
+      "state": "FL",
+      "zip_code": "33154",
+      "lat": 25.8917,
+      "lon": -80.123,
+      "price": 15750000.0,
+      "status": "listed",
+      "year_built": 2025,
+      "builder": "SDH Studio Build",
+      "parcel_id": "02-3220-001-0010",
+      "listing_url": "https://www.example-mls.com/listing/anchor-3-1",
+      "provenance": {
+        "source": "miami-dade-permits+mls-feed",
+        "source_url": "https://www.miamidade.gov/permits",
+        "retrieved_at": "2026-08-27T12:00:00+00:00"
+      }
+    },
+    {
+      "id": "anchor-4-1",
+      "address": "1500 Harbor Drive",
+      "city": "Key Biscayne",
+      "state": "FL",
+      "zip_code": "33149",
+      "lat": 25.6906,
+      "lon": -80.162,
+      "price": 22000000.0,
+      "status": "sold",
+      "year_built": 2023,
+      "builder": "Cassis Group",
+      "parcel_id": "02-3230-001-0010",
+      "listing_url": "https://www.example-mls.com/listing/anchor-4-1",
+      "provenance": {
+        "source": "miami-dade-permits+mls-feed",
+        "source_url": "https://www.miamidade.gov/permits",
+        "retrieved_at": "2026-08-23T12:00:00+00:00"
+      }
+    },
+    {
+      "id": "anchor-4-2",
+      "address": "1508 Harbor Drive",
+      "city": "Key Biscayne",
+      "state": "FL",
+      "zip_code": "33149",
+      "lat": 25.693073,
+      "lon": -80.159866,
+      "price": 27400000.0,
+      "status": "sold",
+      "year_built": 2025,
+      "builder": "Cassis Group",
+      "parcel_id": "02-3231-001-0010",
+      "listing_url": "https://www.example-mls.com/listing/anchor-4-2",
+      "provenance": {
+        "source": "miami-dade-permits+mls-feed",
+        "source_url": "https://www.miamidade.gov/permits",
+        "retrieved_at": "2026-08-29T12:00:00+00:00"
+      }
+    },
+    {
+      "id": "anchor-4-3",
+      "address": "1516 Harbor Drive",
+      "city": "Key Biscayne",
+      "state": "FL",
+      "zip_code": "33149",
+      "lat": 25.695545,
+      "lon": -80.157732,
+      "price": 15750000.0,
+      "status": "under_contract",
+      "year_built": 2025,
+      "builder": "SDH Studio Build",
+      "parcel_id": "02-3232-001-0010",
+      "listing_url": "https://www.example-mls.com/listing/anchor-4-3",
+      "provenance": {
+        "source": "miami-dade-permits+mls-feed",
+        "source_url": "https://www.miamidade.gov/permits",
+        "retrieved_at": "2026-09-04T12:00:00+00:00"
+      }
+    }
+  ],
+  "parcels": [
+    {
+      "parcel_id": "02-3200-002-1000",
+      "address": "1300 North Bay Road",
+      "city": "Miami Beach",
+      "state": "FL",
+      "zip_code": "33139",
+      "lat": 25.791162,
+      "lon": -80.139868,
+      "year_built": 1968,
+      "lot_size_sqft": 6500.0,
+      "estimated_value": 3900000.0,
+      "owner_name": "Sunset Isles Properties Inc",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3200-002-1000",
+      "zillow_url": "https://www.zillow.com/homes/02-3200-002-1000_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-09-01T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3201-002-1001",
+      "address": "1306 North Bay Road",
+      "city": "Miami Beach",
+      "state": "FL",
+      "zip_code": "33139",
+      "lat": 25.793023,
+      "lon": -80.139241,
+      "year_built": 1999,
+      "lot_size_sqft": 12400.0,
+      "estimated_value": 1150000.0,
+      "owner_name": "Moreno Family Trust",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3201-002-1001",
+      "zillow_url": "https://www.zillow.com/homes/02-3201-002-1001_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-31T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3202-002-1002",
+      "address": "1312 North Bay Road",
+      "city": "Miami Beach",
+      "state": "FL",
+      "zip_code": "33139",
+      "lat": 25.791201,
+      "lon": -80.140866,
+      "year_built": 1968,
+      "lot_size_sqft": 9800.0,
+      "estimated_value": 1150000.0,
+      "owner_name": "Carlos Moreno Revocable Trust",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3202-002-1002",
+      "zillow_url": "https://www.zillow.com/homes/02-3202-002-1002_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-26T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3203-002-1003",
+      "address": "1318 North Bay Road",
+      "city": "Miami Beach",
+      "state": "FL",
+      "zip_code": "33139",
+      "lat": 25.793496,
+      "lon": -80.137378,
+      "year_built": 1947,
+      "lot_size_sqft": 9800.0,
+      "estimated_value": 1640000.0,
+      "owner_name": "Robert Delgado",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3203-002-1003",
+      "zillow_url": "https://www.zillow.com/homes/02-3203-002-1003_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-09-03T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3204-002-1004",
+      "address": "1324 North Bay Road",
+      "city": "Miami Beach",
+      "state": "FL",
+      "zip_code": "33139",
+      "lat": 25.790557,
+      "lon": -80.141767,
+      "year_built": 2012,
+      "lot_size_sqft": 9800.0,
+      "estimated_value": 1640000.0,
+      "owner_name": "Maria Castellano & James Moreno",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3204-002-1004",
+      "zillow_url": "https://www.zillow.com/homes/02-3204-002-1004_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-25T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3205-002-1005",
+      "address": "1330 North Bay Road",
+      "city": "Miami Beach",
+      "state": "FL",
+      "zip_code": "33139",
+      "lat": 25.792401,
+      "lon": -80.136938,
+      "year_built": 1968,
+      "lot_size_sqft": 21000.0,
+      "estimated_value": 2300000.0,
+      "owner_name": "Bay Road Holdings LLC",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3205-002-1005",
+      "zillow_url": "https://www.zillow.com/homes/02-3205-002-1005_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-09-08T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3206-002-1006",
+      "address": "1336 North Bay Road",
+      "city": "Miami Beach",
+      "state": "FL",
+      "zip_code": "33139",
+      "lat": 25.790907,
+      "lon": -80.139796,
+      "year_built": 1947,
+      "lot_size_sqft": 21000.0,
+      "estimated_value": 1640000.0,
+      "owner_name": "Castellano Family Trust",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3206-002-1006",
+      "zillow_url": "https://www.zillow.com/homes/02-3206-002-1006_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-16T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3207-002-1007",
+      "address": "1342 North Bay Road",
+      "city": "Miami Beach",
+      "state": "FL",
+      "zip_code": "33139",
+      "lat": 25.792764,
+      "lon": -80.137349,
+      "year_built": 1968,
+      "lot_size_sqft": 21000.0,
+      "estimated_value": 2480000.0,
+      "owner_name": "Patricia Castellano Revocable Trust",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3207-002-1007",
+      "zillow_url": "https://www.zillow.com/homes/02-3207-002-1007_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-27T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3208-002-1008",
+      "address": "1348 North Bay Road",
+      "city": "Miami Beach",
+      "state": "FL",
+      "zip_code": "33139",
+      "lat": 25.788274,
+      "lon": -80.139628,
+      "year_built": 1968,
+      "lot_size_sqft": 15600.0,
+      "estimated_value": 1150000.0,
+      "owner_name": "James Moreno",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3208-002-1008",
+      "zillow_url": "https://www.zillow.com/homes/02-3208-002-1008_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-23T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3209-002-1009",
+      "address": "1354 North Bay Road",
+      "city": "Miami Beach",
+      "state": "FL",
+      "zip_code": "33139",
+      "lat": 25.793069,
+      "lon": -80.137502,
+      "year_built": 1955,
+      "lot_size_sqft": 8200.0,
+      "estimated_value": 1640000.0,
+      "owner_name": "James Kaplan & James Whitfield",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3209-002-1009",
+      "zillow_url": "https://www.zillow.com/homes/02-3209-002-1009_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-27T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3210-002-1000",
+      "address": "1400 Leafy Way",
+      "city": "Coconut Grove",
+      "state": "FL",
+      "zip_code": "33133",
+      "lat": 25.727749,
+      "lon": -80.244639,
+      "year_built": 1970,
+      "lot_size_sqft": 15600.0,
+      "estimated_value": 1950000.0,
+      "owner_name": "Bay Road Holdings LLC",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3210-002-1000",
+      "zillow_url": "https://www.zillow.com/homes/02-3210-002-1000_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-20T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3211-002-1001",
+      "address": "1406 Leafy Way",
+      "city": "Coconut Grove",
+      "state": "FL",
+      "zip_code": "33133",
+      "lat": 25.729361,
+      "lon": -80.241404,
+      "year_built": 1970,
+      "lot_size_sqft": 9800.0,
+      "estimated_value": 1150000.0,
+      "owner_name": "Brennan Family Trust",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3211-002-1001",
+      "zillow_url": "https://www.zillow.com/homes/02-3211-002-1001_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-30T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3212-002-1002",
+      "address": "1412 Leafy Way",
+      "city": "Coconut Grove",
+      "state": "FL",
+      "zip_code": "33133",
+      "lat": 25.734463,
+      "lon": -80.237041,
+      "year_built": 1999,
+      "lot_size_sqft": 12400.0,
+      "estimated_value": 1150000.0,
+      "owner_name": "Patricia Whitfield Revocable Trust",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3212-002-1002",
+      "zillow_url": "https://www.zillow.com/homes/02-3212-002-1002_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-24T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3213-002-1003",
+      "address": "1418 Leafy Way",
+      "city": "Coconut Grove",
+      "state": "FL",
+      "zip_code": "33133",
+      "lat": 25.727901,
+      "lon": -80.241256,
+      "year_built": 1962,
+      "lot_size_sqft": 15600.0,
+      "estimated_value": 2480000.0,
+      "owner_name": "James Ferguson",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3213-002-1003",
+      "zillow_url": "https://www.zillow.com/homes/02-3213-002-1003_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-09-09T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3214-002-1004",
+      "address": "1424 Leafy Way",
+      "city": "Coconut Grove",
+      "state": "FL",
+      "zip_code": "33133",
+      "lat": 25.731473,
+      "lon": -80.242339,
+      "year_built": 1962,
+      "lot_size_sqft": 8200.0,
+      "estimated_value": 1150000.0,
+      "owner_name": "James Brennan & Daniel Castellano",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3214-002-1004",
+      "zillow_url": "https://www.zillow.com/homes/02-3214-002-1004_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-27T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3215-002-1005",
+      "address": "1430 Leafy Way",
+      "city": "Coconut Grove",
+      "state": "FL",
+      "zip_code": "33133",
+      "lat": 25.733798,
+      "lon": -80.239592,
+      "year_built": 1955,
+      "lot_size_sqft": 8200.0,
+      "estimated_value": 2480000.0,
+      "owner_name": "Sunset Isles Properties Inc",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3215-002-1005",
+      "zillow_url": "https://www.zillow.com/homes/02-3215-002-1005_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-23T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3216-002-1006",
+      "address": "1436 Leafy Way",
+      "city": "Coconut Grove",
+      "state": "FL",
+      "zip_code": "33133",
+      "lat": 25.727232,
+      "lon": -80.242563,
+      "year_built": 1984,
+      "lot_size_sqft": 12400.0,
+      "estimated_value": 2300000.0,
+      "owner_name": "Ferguson Family Trust",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3216-002-1006",
+      "zillow_url": "https://www.zillow.com/homes/02-3216-002-1006_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-21T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3217-002-1007",
+      "address": "1442 Leafy Way",
+      "city": "Coconut Grove",
+      "state": "FL",
+      "zip_code": "33133",
+      "lat": 25.728179,
+      "lon": -80.241609,
+      "year_built": 1999,
+      "lot_size_sqft": 15600.0,
+      "estimated_value": 1950000.0,
+      "owner_name": "Patricia Brennan Revocable Trust",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3217-002-1007",
+      "zillow_url": "https://www.zillow.com/homes/02-3217-002-1007_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-09-09T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3218-002-1008",
+      "address": "1448 Leafy Way",
+      "city": "Coconut Grove",
+      "state": "FL",
+      "zip_code": "33133",
+      "lat": 25.732961,
+      "lon": -80.238836,
+      "year_built": 1938,
+      "lot_size_sqft": 21000.0,
+      "estimated_value": 1640000.0,
+      "owner_name": "Daniel Ferguson",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3218-002-1008",
+      "zillow_url": "https://www.zillow.com/homes/02-3218-002-1008_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-22T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3219-002-1009",
+      "address": "1454 Leafy Way",
+      "city": "Coconut Grove",
+      "state": "FL",
+      "zip_code": "33133",
+      "lat": 25.728166,
+      "lon": -80.243766,
+      "year_built": 1955,
+      "lot_size_sqft": 8200.0,
+      "estimated_value": 1150000.0,
+      "owner_name": "Linda Castellano & Linda Brennan",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3219-002-1009",
+      "zillow_url": "https://www.zillow.com/homes/02-3219-002-1009_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-09-01T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3220-002-1000",
+      "address": "1500 Bal Bay Drive",
+      "city": "Bal Harbour",
+      "state": "FL",
+      "zip_code": "33154",
+      "lat": 25.892631,
+      "lon": -80.124223,
+      "year_built": 1962,
+      "lot_size_sqft": 6500.0,
+      "estimated_value": 1150000.0,
+      "owner_name": "Bay Road Holdings LLC",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3220-002-1000",
+      "zillow_url": "https://www.zillow.com/homes/02-3220-002-1000_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-17T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3221-002-1001",
+      "address": "1506 Bal Bay Drive",
+      "city": "Bal Harbour",
+      "state": "FL",
+      "zip_code": "33154",
+      "lat": 25.892074,
+      "lon": -80.123197,
+      "year_built": 1968,
+      "lot_size_sqft": 6500.0,
+      "estimated_value": 1640000.0,
+      "owner_name": "Kaplan Family Trust",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3221-002-1001",
+      "zillow_url": "https://www.zillow.com/homes/02-3221-002-1001_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-23T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3222-002-1002",
+      "address": "1512 Bal Bay Drive",
+      "city": "Bal Harbour",
+      "state": "FL",
+      "zip_code": "33154",
+      "lat": 25.890744,
+      "lon": -80.124807,
+      "year_built": 1947,
+      "lot_size_sqft": 15600.0,
+      "estimated_value": 2480000.0,
+      "owner_name": "Henry Whitfield Revocable Trust",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3222-002-1002",
+      "zillow_url": "https://www.zillow.com/homes/02-3222-002-1002_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-19T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3223-002-1003",
+      "address": "1518 Bal Bay Drive",
+      "city": "Bal Harbour",
+      "state": "FL",
+      "zip_code": "33154",
+      "lat": 25.889889,
+      "lon": -80.12141,
+      "year_built": 1970,
+      "lot_size_sqft": 9800.0,
+      "estimated_value": 2480000.0,
+      "owner_name": "Henry Ferguson",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3223-002-1003",
+      "zillow_url": "https://www.zillow.com/homes/02-3223-002-1003_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-24T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3224-002-1004",
+      "address": "1524 Bal Bay Drive",
+      "city": "Bal Harbour",
+      "state": "FL",
+      "zip_code": "33154",
+      "lat": 25.893122,
+      "lon": -80.124634,
+      "year_built": 1968,
+      "lot_size_sqft": 6500.0,
+      "estimated_value": 2480000.0,
+      "owner_name": "Henry Whitfield & Carlos Delgado",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3224-002-1004",
+      "zillow_url": "https://www.zillow.com/homes/02-3224-002-1004_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-25T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3225-002-1005",
+      "address": "1530 Bal Bay Drive",
+      "city": "Bal Harbour",
+      "state": "FL",
+      "zip_code": "33154",
+      "lat": 25.892385,
+      "lon": -80.122725,
+      "year_built": 1947,
+      "lot_size_sqft": 21000.0,
+      "estimated_value": 1640000.0,
+      "owner_name": "Atlantic Realty Group LLC",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3225-002-1005",
+      "zillow_url": "https://www.zillow.com/homes/02-3225-002-1005_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-09-03T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3226-002-1006",
+      "address": "1536 Bal Bay Drive",
+      "city": "Bal Harbour",
+      "state": "FL",
+      "zip_code": "33154",
+      "lat": 25.890932,
+      "lon": -80.122901,
+      "year_built": 1999,
+      "lot_size_sqft": 21000.0,
+      "estimated_value": 2300000.0,
+      "owner_name": "Moreno Family Trust",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3226-002-1006",
+      "zillow_url": "https://www.zillow.com/homes/02-3226-002-1006_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-09-07T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3227-002-1007",
+      "address": "1542 Bal Bay Drive",
+      "city": "Bal Harbour",
+      "state": "FL",
+      "zip_code": "33154",
+      "lat": 25.890296,
+      "lon": -80.122607,
+      "year_built": 2012,
+      "lot_size_sqft": 12400.0,
+      "estimated_value": 1640000.0,
+      "owner_name": "Susan Kaplan Revocable Trust",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3227-002-1007",
+      "zillow_url": "https://www.zillow.com/homes/02-3227-002-1007_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-09-04T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3228-002-1008",
+      "address": "1548 Bal Bay Drive",
+      "city": "Bal Harbour",
+      "state": "FL",
+      "zip_code": "33154",
+      "lat": 25.891128,
+      "lon": -80.123541,
+      "year_built": 1938,
+      "lot_size_sqft": 9800.0,
+      "estimated_value": 1150000.0,
+      "owner_name": "Carlos Moreno",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3228-002-1008",
+      "zillow_url": "https://www.zillow.com/homes/02-3228-002-1008_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-22T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3229-002-1009",
+      "address": "1554 Bal Bay Drive",
+      "city": "Bal Harbour",
+      "state": "FL",
+      "zip_code": "33154",
+      "lat": 25.892387,
+      "lon": -80.12398,
+      "year_built": 2012,
+      "lot_size_sqft": 8200.0,
+      "estimated_value": 2480000.0,
+      "owner_name": "James Brennan & Susan Alvarez",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3229-002-1009",
+      "zillow_url": "https://www.zillow.com/homes/02-3229-002-1009_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-23T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3230-002-1000",
+      "address": "1600 Harbor Drive",
+      "city": "Key Biscayne",
+      "state": "FL",
+      "zip_code": "33149",
+      "lat": 25.690798,
+      "lon": -80.162215,
+      "year_built": 1968,
+      "lot_size_sqft": 21000.0,
+      "estimated_value": 2300000.0,
+      "owner_name": "Atlantic Realty Group LLC",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3230-002-1000",
+      "zillow_url": "https://www.zillow.com/homes/02-3230-002-1000_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-18T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3231-002-1001",
+      "address": "1606 Harbor Drive",
+      "city": "Key Biscayne",
+      "state": "FL",
+      "zip_code": "33149",
+      "lat": 25.693724,
+      "lon": -80.1604,
+      "year_built": 1999,
+      "lot_size_sqft": 8200.0,
+      "estimated_value": 1640000.0,
+      "owner_name": "Brennan Family Trust",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3231-002-1001",
+      "zillow_url": "https://www.zillow.com/homes/02-3231-002-1001_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-09-03T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3232-002-1002",
+      "address": "1612 Harbor Drive",
+      "city": "Key Biscayne",
+      "state": "FL",
+      "zip_code": "33149",
+      "lat": 25.696643,
+      "lon": -80.159762,
+      "year_built": 1947,
+      "lot_size_sqft": 21000.0,
+      "estimated_value": 2300000.0,
+      "owner_name": "Henry Moreno Revocable Trust",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3232-002-1002",
+      "zillow_url": "https://www.zillow.com/homes/02-3232-002-1002_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-09-07T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3233-002-1003",
+      "address": "1618 Harbor Drive",
+      "city": "Key Biscayne",
+      "state": "FL",
+      "zip_code": "33149",
+      "lat": 25.689943,
+      "lon": -80.162858,
+      "year_built": 1968,
+      "lot_size_sqft": 8200.0,
+      "estimated_value": 2480000.0,
+      "owner_name": "Linda Brennan",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3233-002-1003",
+      "zillow_url": "https://www.zillow.com/homes/02-3233-002-1003_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-16T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3234-002-1004",
+      "address": "1624 Harbor Drive",
+      "city": "Key Biscayne",
+      "state": "FL",
+      "zip_code": "33149",
+      "lat": 25.693151,
+      "lon": -80.160114,
+      "year_built": 1938,
+      "lot_size_sqft": 15600.0,
+      "estimated_value": 2300000.0,
+      "owner_name": "Maria Ferguson & Robert Castellano",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3234-002-1004",
+      "zillow_url": "https://www.zillow.com/homes/02-3234-002-1004_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-21T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3235-002-1005",
+      "address": "1630 Harbor Drive",
+      "city": "Key Biscayne",
+      "state": "FL",
+      "zip_code": "33149",
+      "lat": 25.694908,
+      "lon": -80.156037,
+      "year_built": 1938,
+      "lot_size_sqft": 12400.0,
+      "estimated_value": 2300000.0,
+      "owner_name": "Bay Road Holdings LLC",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3235-002-1005",
+      "zillow_url": "https://www.zillow.com/homes/02-3235-002-1005_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-18T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3236-002-1006",
+      "address": "1636 Harbor Drive",
+      "city": "Key Biscayne",
+      "state": "FL",
+      "zip_code": "33149",
+      "lat": 25.690619,
+      "lon": -80.16172,
+      "year_built": 1947,
+      "lot_size_sqft": 9800.0,
+      "estimated_value": 1150000.0,
+      "owner_name": "Delgado Family Trust",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3236-002-1006",
+      "zillow_url": "https://www.zillow.com/homes/02-3236-002-1006_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-09-07T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3237-002-1007",
+      "address": "1642 Harbor Drive",
+      "city": "Key Biscayne",
+      "state": "FL",
+      "zip_code": "33149",
+      "lat": 25.694574,
+      "lon": -80.161015,
+      "year_built": 1984,
+      "lot_size_sqft": 15600.0,
+      "estimated_value": 2300000.0,
+      "owner_name": "Maria Alvarez Revocable Trust",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3237-002-1007",
+      "zillow_url": "https://www.zillow.com/homes/02-3237-002-1007_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-26T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3238-002-1008",
+      "address": "1648 Harbor Drive",
+      "city": "Key Biscayne",
+      "state": "FL",
+      "zip_code": "33149",
+      "lat": 25.695378,
+      "lon": -80.156442,
+      "year_built": 1968,
+      "lot_size_sqft": 6500.0,
+      "estimated_value": 1150000.0,
+      "owner_name": "Robert Kaplan",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3238-002-1008",
+      "zillow_url": "https://www.zillow.com/homes/02-3238-002-1008_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-21T12:00:00+00:00"
+      }
+    },
+    {
+      "parcel_id": "02-3239-002-1009",
+      "address": "1654 Harbor Drive",
+      "city": "Key Biscayne",
+      "state": "FL",
+      "zip_code": "33149",
+      "lat": 25.691538,
+      "lon": -80.162267,
+      "year_built": 1947,
+      "lot_size_sqft": 21000.0,
+      "estimated_value": 1640000.0,
+      "owner_name": "Robert Ferguson & Elena Kaplan",
+      "assessor_url": "https://www.miamidade.gov/Apps/PA/propertysearch/#/?folio=02-3239-002-1009",
+      "zillow_url": "https://www.zillow.com/homes/02-3239-002-1009_rb/",
+      "provenance": {
+        "source": "miami-dade-property-appraiser+avm",
+        "source_url": "https://www.miamidade.gov/pa/property_search.asp",
+        "retrieved_at": "2026-08-29T12:00:00+00:00"
+      }
+    }
+  ]
+}

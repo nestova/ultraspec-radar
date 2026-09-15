@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  /* Survey-plat palette: drafting ink, blueprint paper lines, gold for the
+     $15M anchors, survey teal for the candidate parcels. */
+  --ink: #0d1417;
+  --ink-raised: #141c21;
+  --ink-sunken: #0a1013;
+  --rule: #24333b;
+  --rule-strong: #354954;
+  --text: #e7eef2;
+  --text-muted: #8ea3ae;
+  --anchor: #d9a441;
+  --anchor-soft: rgba(217, 164, 65, 0.16);
+  --survey: #4ec3c0;
+  --survey-soft: rgba(78, 195, 192, 0.14);
+  --flag: #c4655a;
+
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --step-0: 0.875rem;
+  --step-1: 1rem;
+  --step-2: 1.25rem;
+  --step-3: 1.75rem;
+  --radius: 3px;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--ink);
+  background-image: linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 96px 96px;
+  background-position: -1px -1px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--step-1);
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+a {
+  color: var(--survey);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--survey);
+  outline-offset: 2px;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
