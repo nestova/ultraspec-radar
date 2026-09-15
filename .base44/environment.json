@@ -1,0 +1,12 @@
+{
+  "previewPort": 3000,
+  "healthPath": "/",
+  "startCommand": "docker compose -f docker-compose.base44.yml up -d",
+  "secrets": [
+    {
+      "name": "ATTOM_API_KEY",
+      "description": "Optional. ATTOM Data Solutions API key for the licensed production listing/parcel feed. Without it the app runs on the built-in offline synthetic pilot dataset for Miami-Dade. Obtain from https://api.developer.attomdata.com/",
+      "requiredAtBoot": false
+    }
+  ]
+}
