@@ -8,6 +8,7 @@ from app.models import RunResult
 from app.pipeline import run_pipeline
 from app.providers import (
     MissingCredentialsError,
+    ProviderUnavailableError,
     available_markets,
     get_listing_provider,
     get_parcel_provider,
@@ -49,18 +50,22 @@ def _run(config: SearchConfig, listing_source: str, parcel_source: str) -> RunRe
         raise HTTPException(status_code=404, detail=str(exc)) from exc
     except MissingCredentialsError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except ProviderUnavailableError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
     except (NotImplementedError, ValueError) as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
 @app.post("/api/run", response_model=RunResult)
-def run(config: SearchConfig, listing_source: str = "fixture", parcel_source: str = "fixture") -> RunResult:
+def run(
+    config: SearchConfig, listing_source: str = "miamidade", parcel_source: str = "miamidade"
+) -> RunResult:
     return _run(config, listing_source, parcel_source)
 
 
 @app.post("/api/run/export.csv", response_class=PlainTextResponse)
 def run_export(
-    config: SearchConfig, listing_source: str = "fixture", parcel_source: str = "fixture"
+    config: SearchConfig, listing_source: str = "miamidade", parcel_source: str = "miamidade"
 ) -> PlainTextResponse:
     csv_text = candidates_to_csv(_run(config, listing_source, parcel_source))
     return PlainTextResponse(

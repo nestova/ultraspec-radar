@@ -23,9 +23,13 @@ source and retrieval timestamp, and the run summary flags sources older than the
 ## Data sources
 
 The PRD rules out scraping Zillow, and no licensed feed credentials are wired up yet, so the default
-providers read an **offline synthetic pilot dataset** for Miami-Dade (`backend/data/miami-dade-fl.json`,
-regenerate with `python scripts/generate_fixture.py`). It is structurally identical to what a licensed feed
-returns, so swapping in a real source is a provider change only.
+providers read **Miami-Dade County public data**: the Property Appraiser's certified tax roll published on
+the county GIS open data hub (ArcGIS Hub "Property Point View" layer, DOR use code 0101 / single family).
+`app/providers/miamidade.py` identifies anchors by assessed value + year built and fetches neighboring
+parcels with a server-side radius query — no credentials needed, with a short-lived cache to spare the
+county endpoint. `POST /api/run?listing_source=fixture&parcel_source=fixture` switches to the offline
+synthetic pilot dataset (`backend/data/miami-dade-fl.json`, regenerate with
+`python scripts/generate_fixture.py`), which stays structurally identical to a licensed feed.
 
 `app/providers/attom.py` is the placeholder for the licensed production path; it raises a clear error until
 `ATTOM_API_KEY` is provisioned. Add new sources by implementing `ListingProvider` / `ParcelProvider` and

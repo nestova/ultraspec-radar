@@ -5,11 +5,18 @@ from app.providers.fixture import (
     FixtureParcelProvider,
     available_markets,
 )
+from app.providers.miamidade import (
+    MiamiDadeListingProvider,
+    MiamiDadeParcelProvider,
+    ProviderUnavailableError,
+)
 
 
 def get_listing_provider(name: str = "fixture") -> ListingProvider:
     if name == "fixture":
         return FixtureListingProvider()
+    if name == "miamidade":
+        return MiamiDadeListingProvider()
     if name == "attom":
         return AttomParcelProvider()
     raise ValueError(f"Unknown listing provider '{name}'")
@@ -18,6 +25,8 @@ def get_listing_provider(name: str = "fixture") -> ListingProvider:
 def get_parcel_provider(name: str = "fixture") -> ParcelProvider:
     if name == "fixture":
         return FixtureParcelProvider()
+    if name == "miamidade":
+        return MiamiDadeParcelProvider()
     if name == "attom":
         return AttomParcelProvider()
     raise ValueError(f"Unknown parcel provider '{name}'")
@@ -28,8 +37,11 @@ __all__ = [
     "FixtureListingProvider",
     "FixtureParcelProvider",
     "ListingProvider",
+    "MiamiDadeListingProvider",
+    "MiamiDadeParcelProvider",
     "MissingCredentialsError",
     "ParcelProvider",
+    "ProviderUnavailableError",
     "available_markets",
     "get_listing_provider",
     "get_parcel_provider",
