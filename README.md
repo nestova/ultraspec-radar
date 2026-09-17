@@ -20,6 +20,10 @@ Implements the MVP scope of `PRD — UltraSpec Radar`: single pilot market, batc
 Every threshold in the table is a request parameter (`app/config.py`), not a constant. Each record keeps its
 source and retrieval timestamp, and the run summary flags sources older than the freshness limit.
 
+Every run is saved automatically — full clusters, anchors, candidates and config — to a SQLite store
+(`app/storage.py`, path via `RUN_DB_PATH`), so no search is lost and past runs can be reloaded from the UI's
+"Saved runs" list.
+
 ## Data sources
 
 The PRD rules out scraping Zillow, and no licensed feed credentials are wired up yet, so the default
@@ -69,6 +73,8 @@ cd frontend && npm run lint && npm run build
 | GET | `/api/config/defaults` | Default thresholds and ranking weights |
 | POST | `/api/run` | Run the pipeline, returns clusters + candidates + run summary |
 | POST | `/api/run/export.csv` | Same run, as a spreadsheet export |
+| GET | `/api/runs` | Saved runs (summary rows) |
+| GET | `/api/runs/{id}` | A saved run's full result |
 
 ## Out of scope
 

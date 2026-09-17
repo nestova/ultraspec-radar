@@ -3,7 +3,8 @@
 ## Architecture
 
 Fullstack app: FastAPI backend (Python) + React/Vite frontend (TypeScript).
-- **No database** — the backend reads live Miami-Dade public data by default (see Data sources), with an offline JSON fixture as fallback.
+- **Run store** — every pipeline run is auto-saved (full result + config) to SQLite (`app/storage.py`, env `RUN_DB_PATH`). In compose it lives in the named volume `run-data` at `/app/rundata/runs.db`, persisting across container recreation; local non-docker runs default to `backend/data/runs.db` (gitignored). `GET /api/runs` lists saved runs, `GET /api/runs/{id}` returns a full saved result. The frontend shows saved runs in the ControlRail and reloads them on click.
+- **No other database** — the backend reads live Miami-Dade public data by default (see Data sources), with an offline JSON fixture as fallback.
 - Single-origin wiring: only port 3000 is public (frontend Vite dev server). The frontend proxies `/api` to the backend at `http://backend:8000` via Vite's `server.proxy` config (`VITE_API_TARGET` env var).
 
 ## Running

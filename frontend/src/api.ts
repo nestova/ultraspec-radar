@@ -1,4 +1,4 @@
-import type { Market, RunResult, SearchConfig } from './types'
+import type { Market, RunResult, SavedRun, SearchConfig } from './types'
 
 async function parseError(response: Response): Promise<never> {
   let detail = `Request failed (${response.status})`
@@ -29,6 +29,18 @@ export async function runSearch(config: SearchConfig): Promise<RunResult> {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(config),
   })
+  if (!response.ok) await parseError(response)
+  return response.json()
+}
+
+export async function fetchRuns(): Promise<SavedRun[]> {
+  const response = await fetch('/api/runs')
+  if (!response.ok) await parseError(response)
+  return response.json()
+}
+
+export async function fetchSavedRun(id: string): Promise<RunResult> {
+  const response = await fetch(`/api/runs/${id}`)
   if (!response.ok) await parseError(response)
   return response.json()
 }

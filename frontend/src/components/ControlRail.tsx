@@ -1,21 +1,35 @@
-import type { Market, SearchConfig } from '../types'
+import { formatDateTime } from '../format'
+import type { Market, SavedRun, SearchConfig } from '../types'
 
 interface Props {
   config: SearchConfig
   markets: Market[]
+  runs: SavedRun[]
   busy: boolean
   canExport: boolean
   onChange: (patch: Partial<SearchConfig>) => void
   onRun: () => void
   onExport: () => void
   onReset: () => void
+  onLoadRun: (run: SavedRun) => void
 }
 
 type NumericKey = {
   [K in keyof SearchConfig]: SearchConfig[K] extends number ? K : never
 }[keyof SearchConfig]
 
-export function ControlRail({ config, markets, busy, canExport, onChange, onRun, onExport, onReset }: Props) {
+export function ControlRail({
+  config,
+  markets,
+  runs,
+  busy,
+  canExport,
+  onChange,
+  onRun,
+  onExport,
+  onReset,
+  onLoadRun,
+}: Props) {
   const numberField = (key: NumericKey, label: string, step = 1) => (
     <div className="field" key={key}>
       <label htmlFor={key}>{label}</label>
@@ -115,6 +129,26 @@ export function ControlRail({ config, markets, busy, canExport, onChange, onRun,
           Reset to defaults
         </button>
       </div>
+
+      <section>
+        <h2>Saved runs</h2>
+        {runs.length === 0 && <p className="runs-empty">Every scan is saved here automatically.</p>}
+        <ul className="run-list">
+          {runs.map((run) => (
+            <li key={run.id}>
+              <button type="button" className="run-item" onClick={() => onLoadRun(run)}>
+                <strong>{formatDateTime(run.created_at)}</strong>
+                <small>
+                  {run.clusters_found} cluster{run.clusters_found === 1 ? '' : 's'} · {run.anchors_found}{' '}
+                  anchor{run.anchors_found === 1 ? '' : 's'} · {run.candidates_returned} candidate
+                  {run.candidates_returned === 1 ? '' : 's'}
+                </small>
+                <small>{run.listing_source}</small>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </section>
     </aside>
   )
 }

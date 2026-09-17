@@ -1,21 +1,28 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import './App.css'
-import { downloadCsv, fetchDefaults, fetchMarkets, runSearch } from './api'
+import { downloadCsv, fetchDefaults, fetchMarkets, fetchRuns, fetchSavedRun, runSearch } from './api'
 import { CandidateTable } from './components/CandidateTable'
 import { ClusterMap } from './components/ClusterMap'
 import { ControlRail } from './components/ControlRail'
 import { formatCurrency, formatDateTime } from './format'
-import type { Market, RunResult, SearchConfig } from './types'
+import type { Market, RunResult, SavedRun, SearchConfig } from './types'
 
 export default function App() {
   const [defaults, setDefaults] = useState<SearchConfig | null>(null)
   const [config, setConfig] = useState<SearchConfig | null>(null)
   const [markets, setMarkets] = useState<Market[]>([])
+  const [runs, setRuns] = useState<SavedRun[]>([])
   const [result, setResult] = useState<RunResult | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  const refreshRuns = useCallback(() => {
+    fetchRuns()
+      .then(setRuns)
+      .catch((err: Error) => setError(err.message))
+  }, [])
 
   useEffect(() => {
     Promise.all([fetchDefaults(), fetchMarkets()])
@@ -25,20 +32,37 @@ export default function App() {
         setMarkets(marketList)
       })
       .catch((err: Error) => setError(err.message))
-  }, [])
+    refreshRuns()
+  }, [refreshRuns])
 
-  const run = useCallback(async (next: SearchConfig) => {
-    setBusy(true)
+  const run = useCallback(
+    async (next: SearchConfig) => {
+      setBusy(true)
+      setError(null)
+      try {
+        const data = await runSearch(next)
+        setResult(data)
+        setSelectedId(data.clusters[0]?.id ?? null)
+        refreshRuns()
+      } catch (err) {
+        setError((err as Error).message)
+        setResult(null)
+      } finally {
+        setBusy(false)
+      }
+    },
+    [refreshRuns],
+  )
+
+  const loadRun = useCallback(async (saved: SavedRun) => {
     setError(null)
     try {
-      const data = await runSearch(next)
+      const data = await fetchSavedRun(saved.id)
       setResult(data)
+      setConfig(data.summary.config)
       setSelectedId(data.clusters[0]?.id ?? null)
     } catch (err) {
       setError((err as Error).message)
-      setResult(null)
-    } finally {
-      setBusy(false)
     }
   }, [])
 
@@ -105,12 +129,14 @@ export default function App() {
         <ControlRail
           config={config}
           markets={markets}
+          runs={runs}
           busy={busy}
           canExport={Boolean(result && result.summary.candidates_returned > 0)}
           onChange={(patch) => setConfig({ ...config, ...patch })}
           onRun={() => void run(config)}
           onExport={() => void downloadCsv(config).catch((err: Error) => setError(err.message))}
           onReset={() => defaults && setConfig(defaults)}
+          onLoadRun={(saved) => void loadRun(saved)}
         />
 
         <main className="main">

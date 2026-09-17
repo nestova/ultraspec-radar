@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse
 
+from app import storage
 from app.config import SearchConfig
 from app.export import candidates_to_csv
 from app.models import RunResult
@@ -60,16 +61,33 @@ def _run(config: SearchConfig, listing_source: str, parcel_source: str) -> RunRe
 def run(
     config: SearchConfig, listing_source: str = "miamidade", parcel_source: str = "miamidade"
 ) -> RunResult:
-    return _run(config, listing_source, parcel_source)
+    result = _run(config, listing_source, parcel_source)
+    storage.save_run(result, listing_source, parcel_source)
+    return result
 
 
 @app.post("/api/run/export.csv", response_class=PlainTextResponse)
 def run_export(
     config: SearchConfig, listing_source: str = "miamidade", parcel_source: str = "miamidade"
 ) -> PlainTextResponse:
-    csv_text = candidates_to_csv(_run(config, listing_source, parcel_source))
+    result = _run(config, listing_source, parcel_source)
+    storage.save_run(result, listing_source, parcel_source)
+    csv_text = candidates_to_csv(result)
     return PlainTextResponse(
         csv_text,
         media_type="text/csv",
         headers={"Content-Disposition": f'attachment; filename="ultraspec-{config.market}.csv"'},
     )
+
+
+@app.get("/api/runs")
+def saved_runs(limit: int = 50) -> list[dict]:
+    return storage.list_runs(limit)
+
+
+@app.get("/api/runs/{run_id}", response_model=RunResult)
+def saved_run(run_id: str) -> RunResult:
+    try:
+        return storage.get_run(run_id)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc

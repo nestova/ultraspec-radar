@@ -108,3 +108,15 @@ export interface Market {
   id: string
   label: string
 }
+
+export interface SavedRun {
+  id: string
+  created_at: string
+  market: string
+  listing_source: string
+  parcel_source: string
+  anchors_found: number
+  clusters_found: number
+  parcels_scanned: number
+  candidates_returned: number
+}
