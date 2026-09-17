@@ -61,6 +61,7 @@
 .layout {
   display: grid;
   grid-template-columns: 320px minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
   min-height: 0;
   overflow: hidden;
 }
