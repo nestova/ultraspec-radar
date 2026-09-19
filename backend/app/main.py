@@ -44,6 +44,25 @@ def markets() -> list[dict]:
     ]
 
 
+# Live data source per market; "auto" (the default) resolves via this map.
+MARKET_SOURCES = {
+    "miami-dade-fl": "miamidade",
+    "paradise-valley-az": "maricopa",
+}
+
+
+def _resolve_sources(config: SearchConfig, listing_source: str, parcel_source: str) -> tuple[str, str]:
+    if listing_source == "auto":
+        listing_source = MARKET_SOURCES.get(config.market, "")
+        if not listing_source:
+            raise ValueError(f"No live data source connected for market '{config.market}'.")
+    if parcel_source == "auto":
+        parcel_source = MARKET_SOURCES.get(config.market, "")
+        if not parcel_source:
+            raise ValueError(f"No live data source connected for market '{config.market}'.")
+    return listing_source, parcel_source
+
+
 @app.get("/api/config/defaults", response_model=SearchConfig)
 def config_defaults() -> SearchConfig:
     return SearchConfig()
@@ -68,19 +87,21 @@ def _run(config: SearchConfig, listing_source: str, parcel_source: str) -> RunRe
 
 @app.post("/api/run", response_model=RunResult)
 def run(
-    config: SearchConfig, listing_source: str = "miamidade", parcel_source: str = "miamidade"
+    config: SearchConfig, listing_source: str = "auto", parcel_source: str = "auto"
 ) -> RunResult:
-    result = _run(config, listing_source, parcel_source)
-    storage.save_run(result, listing_source, parcel_source)
+    resolved = _resolve_sources(config, listing_source, parcel_source)
+    result = _run(config, *resolved)
+    storage.save_run(result, *resolved)
     return result
 
 
 @app.post("/api/run/export.csv", response_class=PlainTextResponse)
 def run_export(
-    config: SearchConfig, listing_source: str = "miamidade", parcel_source: str = "miamidade"
+    config: SearchConfig, listing_source: str = "auto", parcel_source: str = "auto"
 ) -> PlainTextResponse:
-    result = _run(config, listing_source, parcel_source)
-    storage.save_run(result, listing_source, parcel_source)
+    resolved = _resolve_sources(config, listing_source, parcel_source)
+    result = _run(config, *resolved)
+    storage.save_run(result, *resolved)
     csv_text = candidates_to_csv(result)
     return PlainTextResponse(
         csv_text,

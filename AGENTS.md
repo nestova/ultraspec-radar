@@ -19,6 +19,8 @@ docker compose -f docker-compose.base44.yml up -d --build
 ## Data sources
 
 - **Default (live)**: `miamidade` providers (`backend/app/providers/miamidade.py`) query the Miami-Dade Property Appraiser's tax roll on the county GIS ArcGIS Hub ("Property Point View" layer). Public, no credentials. Anchors = single-family (DOR 0101) parcels with assessed value ≥ threshold and year built ≥ threshold; parcels = server-side radius queries in feet. First run of a config takes ~15-30s (one county query per anchor); results are cached in-process for 10 min. Network/API failures raise `ProviderUnavailableError` → HTTP 502.
+- **Paradise Valley, AZ (live)**: `maricopa` providers (`backend/app/providers/maricopa.py`) query the Maricopa County Assessor's parcel MapServer (`gis.mcassessor.maricopa.gov`). Its FCV/year-built fields are comma-formatted STRINGS, so numeric server-side WHERE clauses fail — the provider bulk-fetches all ~7k "PARADISE VALLEY" residential (PUC 01xx) rows once, caches them 10 min, and filters anchors/radii in memory (`haversine_ft`). First scan ~15s, repeats instant.
+- **Source routing**: `/api/run` takes `listing_source`/`parcel_source` (default `auto`), resolved per market via `MARKET_SOURCES` in `main.py` (miami-dade-fl→miamidade, paradise-valley-az→maricopa). Explicit names (`fixture`, etc.) still work.
 - **Offline fallback**: `fixture` providers read `backend/data/miami-dade-fl.json`. Select via `POST /api/run?listing_source=fixture&parcel_source=fixture`.
 - The county layer's field names are prefixed `TRUE_` (e.g. `TRUE_SITE_ADDR`, `TRUE_OWNER1`) and single-family is DOR code `0101` (not `0100`).
 
