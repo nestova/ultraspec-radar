@@ -2,6 +2,7 @@ from datetime import datetime, timedelta, timezone
 
 from app.clustering import bbox, centroid, cluster_anchors
 from app.config import SearchConfig
+from app.developers import match_developers
 from app.geo import haversine_ft
 from app.models import (
     AnchorHome,
@@ -131,6 +132,8 @@ def run_pipeline(
             filtered.append((parcel, ownership, anchor, distance))
 
         candidates = _score_candidates(filtered, avg_price, config)
+        for candidate in candidates:
+            candidate.developer_matches = match_developers(candidate.parcel, avg_price)
         centroid_lat, centroid_lon = centroid(members)
         clusters.append(
             Cluster(

@@ -59,6 +59,15 @@ class OwnershipClassification(BaseModel):
     needs_review: bool
 
 
+class DeveloperMatch(BaseModel):
+    """A developer whose buy-box fits a candidate parcel, with their max land offer."""
+
+    developer: str
+    fit: float
+    max_offer: float
+    rationale: str
+
+
 class Candidate(BaseModel):
     parcel: Parcel
     ownership: OwnershipClassification
@@ -67,6 +76,7 @@ class Candidate(BaseModel):
     value_gap: float
     score: float
     score_breakdown: dict[str, float]
+    developer_matches: list[DeveloperMatch] = []
 
 
 class Cluster(BaseModel):

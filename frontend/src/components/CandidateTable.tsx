@@ -42,6 +42,7 @@ export function CandidateTable({ cluster }: Props) {
             <th scope="col">Value gap</th>
             <th scope="col">To anchor</th>
             <th scope="col">Score</th>
+            <th scope="col">Developer fit</th>
             <th scope="col">Parcel</th>
             <th scope="col">Records</th>
           </tr>
@@ -64,6 +65,18 @@ export function CandidateTable({ cluster }: Props) {
               <td className="mono">{formatCurrency(candidate.value_gap)}</td>
               <td className="mono">{formatFeet(candidate.distance_to_anchor_ft)}</td>
               <td className="mono">{candidate.score.toFixed(3)}</td>
+              <td>
+                {(() => {
+                  const best = candidate.developer_matches?.[0]
+                  if (!best) return '—'
+                  return (
+                    <span className="dev-match" title={best.rationale}>
+                      <strong>{best.developer}</strong>
+                      <span className="mono">up to {formatCurrency(best.max_offer)}</span>
+                    </span>
+                  )
+                })()}
+              </td>
               <td className="mono">{candidate.parcel.parcel_id}</td>
               <td>
                 {candidate.parcel.assessor_url && (

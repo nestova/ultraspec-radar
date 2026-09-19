@@ -22,6 +22,8 @@ COLUMNS = [
     "cluster_avg_anchor_price",
     "value_gap",
     "score",
+    "developer",
+    "developer_max_offer",
     "assessor_url",
     "zillow_url",
     "source",
@@ -57,6 +59,12 @@ def candidates_to_csv(result: RunResult) -> str:
                     "cluster_avg_anchor_price": round(cluster.avg_anchor_price, 2),
                     "value_gap": candidate.value_gap,
                     "score": candidate.score,
+                    "developer": candidate.developer_matches[0].developer
+                    if candidate.developer_matches
+                    else "",
+                    "developer_max_offer": candidate.developer_matches[0].max_offer
+                    if candidate.developer_matches
+                    else "",
                     "assessor_url": parcel.assessor_url,
                     "zillow_url": parcel.zillow_url,
                     "source": parcel.provenance.source,

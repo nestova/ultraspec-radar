@@ -73,6 +73,14 @@ export interface Candidate {
   value_gap: number
   score: number
   score_breakdown: Record<string, number>
+  developer_matches?: DeveloperMatch[]
+}
+
+export interface DeveloperMatch {
+  developer: string
+  fit: number
+  max_offer: number
+  rationale: string
 }
 
 export interface Cluster {
