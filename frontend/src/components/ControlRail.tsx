@@ -43,6 +43,9 @@ export function ControlRail({
     </div>
   )
 
+  const activeMarket = markets.find((market) => market.id === config.market)
+  const scannable = activeMarket?.scannable ?? true
+
   return (
     <aside className="rail">
       <section>
@@ -56,11 +59,22 @@ export function ControlRail({
           >
             {markets.map((market) => (
               <option key={market.id} value={market.id}>
-                {market.label}
+                {market.scannable ? market.label : `${market.label} — buy-boxes ready`}
               </option>
             ))}
           </select>
         </div>
+        {activeMarket?.developers && activeMarket.developers.length > 0 && (
+          <p className="market-developers">
+            <span>Buy-boxes loaded:</span> {activeMarket.developers.join(' · ')}
+          </p>
+        )}
+        {!scannable && (
+          <p className="market-developers">
+            Live parcel data isn't connected for this market yet — buy-box matching is ready and
+            scans start as soon as a data source is added.
+          </p>
+        )}
       </section>
 
       <section>
@@ -119,10 +133,10 @@ export function ControlRail({
       </section>
 
       <div className="actions">
-        <button className="btn btn-primary" onClick={onRun} disabled={busy}>
+        <button className="btn btn-primary" onClick={onRun} disabled={busy || !scannable}>
           {busy ? 'Scanning…' : 'Run scan'}
         </button>
-        <button className="btn" onClick={onExport} disabled={busy || !canExport}>
+        <button className="btn" onClick={onExport} disabled={busy || !scannable || !canExport}>
           Export CSV
         </button>
         <button className="btn" onClick={onReset} disabled={busy}>

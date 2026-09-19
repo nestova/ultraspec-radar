@@ -76,6 +76,20 @@
   overflow-y: auto;
 }
 
+.market-developers {
+  margin: 2px 0 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.market-developers span {
+  display: block;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.68rem;
+}
+
 .rail h2 {
   font-size: 0.78rem;
   letter-spacing: 0.14em;

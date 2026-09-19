@@ -4,13 +4,14 @@ from fastapi.responses import PlainTextResponse
 
 from app import storage
 from app.config import SearchConfig
+from app.developers import developer_names
 from app.export import candidates_to_csv
+from app.markets import MARKETS
 from app.models import RunResult
 from app.pipeline import run_pipeline
 from app.providers import (
     MissingCredentialsError,
     ProviderUnavailableError,
-    available_markets,
     get_listing_provider,
     get_parcel_provider,
 )
@@ -32,7 +33,15 @@ def health() -> dict[str, str]:
 
 @app.get("/api/markets")
 def markets() -> list[dict]:
-    return available_markets()
+    return [
+        {
+            "id": market_id,
+            "label": label,
+            "scannable": scannable,
+            "developers": developer_names(market_id),
+        }
+        for market_id, label, scannable in MARKETS
+    ]
 
 
 @app.get("/api/config/defaults", response_model=SearchConfig)

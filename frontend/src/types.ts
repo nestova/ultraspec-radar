@@ -115,6 +115,8 @@ export interface RunResult {
 export interface Market {
   id: string
   label: string
+  scannable: boolean
+  developers: string[]
 }
 
 export interface SavedRun {

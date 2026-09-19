@@ -133,7 +133,7 @@ def run_pipeline(
 
         candidates = _score_candidates(filtered, avg_price, config)
         for candidate in candidates:
-            candidate.developer_matches = match_developers(candidate.parcel, avg_price)
+            candidate.developer_matches = match_developers(candidate.parcel, avg_price, config.market)
         centroid_lat, centroid_lon = centroid(members)
         clusters.append(
             Cluster(
