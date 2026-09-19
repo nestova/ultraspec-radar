@@ -48,6 +48,11 @@ def markets() -> list[dict]:
 MARKET_SOURCES = {
     "miami-dade-fl": "miamidade",
     "paradise-valley-az": "maricopa",
+    "port-royal-naples-fl": "collier",
+    "bradenton-anna-maria-fl": "manatee",
+    "hamptons-ny": "nys",
+    "charlotte-nc": "mecklenburg",
+    "las-vegas-henderson-nv": "clark",
 }
 
 

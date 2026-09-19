@@ -1,5 +1,7 @@
 from app.providers.attom import AttomParcelProvider, MissingCredentialsError
 from app.providers.base import ListingProvider, ParcelProvider
+from app.providers.counties import CountyListingProvider, CountyParcelProvider
+from app.providers.county_sources import COUNTY_SOURCES
 from app.providers.fixture import (
     FixtureListingProvider,
     FixtureParcelProvider,
@@ -23,6 +25,8 @@ def get_listing_provider(name: str = "fixture") -> ListingProvider:
         return MiamiDadeListingProvider()
     if name == "maricopa":
         return MaricopaListingProvider()
+    if name in COUNTY_SOURCES:
+        return CountyListingProvider(COUNTY_SOURCES[name])
     if name == "attom":
         return AttomParcelProvider()
     raise ValueError(f"Unknown listing provider '{name}'")
@@ -35,6 +39,8 @@ def get_parcel_provider(name: str = "fixture") -> ParcelProvider:
         return MiamiDadeParcelProvider()
     if name == "maricopa":
         return MaricopaParcelProvider()
+    if name in COUNTY_SOURCES:
+        return CountyParcelProvider(COUNTY_SOURCES[name])
     if name == "attom":
         return AttomParcelProvider()
     raise ValueError(f"Unknown parcel provider '{name}'")
