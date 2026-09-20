@@ -361,6 +361,12 @@ tbody tr:hover {
   color: var(--flag);
 }
 
+.tag-water {
+  margin-left: 8px;
+  border-color: #5fa8c7;
+  color: #7cc2dd;
+}
+
 .notice {
   margin: 0;
   padding: 10px 24px;

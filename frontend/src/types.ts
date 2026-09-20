@@ -10,6 +10,7 @@ export interface SearchConfig {
   candidate_max_year_built: number
   exclude_corporate_owners: boolean
   include_trusts: boolean
+  waterfront_only: boolean
   weight_proximity: number
   weight_value_gap: number
   weight_lot_size: number
@@ -54,6 +55,7 @@ export interface Parcel {
   owner_name: string | null
   assessor_url: string | null
   zillow_url: string | null
+  waterfront: boolean | null
   provenance: Provenance
 }
 

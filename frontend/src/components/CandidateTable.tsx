@@ -51,7 +51,10 @@ export function CandidateTable({ cluster }: Props) {
           {cluster.candidates.map((candidate, index) => (
             <tr key={candidate.parcel.parcel_id}>
               <td className="rank">{index + 1}</td>
-              <td>{candidate.parcel.address}</td>
+              <td>
+                {candidate.parcel.address}
+                {candidate.parcel.waterfront && <span className="tag tag-water">waterfront</span>}
+              </td>
               <td>{candidate.parcel.owner_name}</td>
               <td>
                 <span className={`tag ${candidate.ownership.ownership_type === 'trust' ? 'tag-trust' : ''}`}>

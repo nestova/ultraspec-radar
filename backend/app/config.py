@@ -20,6 +20,7 @@ class SearchConfig(BaseModel):
 
     exclude_corporate_owners: bool = True
     include_trusts: bool = True
+    waterfront_only: bool = False
 
     weight_proximity: float = 0.5
     weight_value_gap: float = 0.3

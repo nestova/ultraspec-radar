@@ -45,6 +45,7 @@ class Parcel(BaseModel):
     owner_name: str | None = None
     assessor_url: str | None = None
     zillow_url: str | None = None
+    waterfront: bool | None = None
     provenance: Provenance
 
 

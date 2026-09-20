@@ -15,6 +15,7 @@ from app.models import (
 )
 from app.ownership import classify_owner, is_eligible
 from app.providers.base import ListingProvider, ParcelProvider
+from app.waterfront import annotate_parcels
 
 
 def _normalize(values: list[float], higher_is_better: bool) -> list[float]:
@@ -115,8 +116,12 @@ def run_pipeline(
 
         parcels_scanned += len(nearest)
 
+        annotate_parcels([p for p, _, _ in nearest.values()])
+
         filtered: list[tuple[Parcel, OwnershipClassification, AnchorHome, float]] = []
         for parcel, anchor, distance in nearest.values():
+            if config.waterfront_only and not parcel.waterfront:
+                continue
             if parcel.estimated_value is None or parcel.estimated_value > config.candidate_max_value:
                 continue
             if parcel.year_built is None or parcel.year_built > config.candidate_max_year_built:

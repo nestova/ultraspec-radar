@@ -121,6 +121,15 @@ export function ControlRail({
           />
           <label htmlFor="exclude_corporate_owners">Exclude LLC / corporate owners</label>
         </div>
+        <div className="field-inline">
+          <input
+            id="waterfront_only"
+            type="checkbox"
+            checked={config.waterfront_only}
+            onChange={(event) => onChange({ waterfront_only: event.target.checked })}
+          />
+          <label htmlFor="waterfront_only">Waterfront only</label>
+        </div>
       </section>
 
       <section>
