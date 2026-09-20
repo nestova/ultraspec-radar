@@ -8,13 +8,13 @@ MARKETS: tuple[tuple[str, str, bool], ...] = (
     # (id, label, scannable)
     ("miami-dade-fl", "Miami-Dade County, FL (pilot)", True),
     ("paradise-valley-az", "Paradise Valley, AZ", True),
-    ("bel-air-beverly-hills-ca", "Los Angeles — Bel Air / Beverly Hills, CA", False),
+    ("bel-air-beverly-hills-ca", "Los Angeles — Bel Air / Beverly Hills, CA", True),
     ("port-royal-naples-fl", "Naples — Port Royal, FL", True),
     ("bradenton-anna-maria-fl", "Bradenton Beach / Anna Maria Island, FL", True),
     ("las-vegas-henderson-nv", "Las Vegas / Henderson, NV", True),
     ("hamptons-ny", "The Hamptons, NY", True),
-    ("seattle-eastside-wa", "Seattle Eastside — Medina / Hunts Point, WA", False),
-    ("atherton-ca", "Atherton / Silicon Valley, CA", False),
+    ("seattle-eastside-wa", "Seattle Eastside — Medina / Hunts Point, WA", True),
+    ("atherton-ca", "Atherton / Silicon Valley, CA", True),
     ("charlotte-nc", "Charlotte — Myers Park / Eastover, NC", True),
 )
 

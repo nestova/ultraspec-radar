@@ -53,6 +53,9 @@ MARKET_SOURCES = {
     "hamptons-ny": "nys",
     "charlotte-nc": "mecklenburg",
     "las-vegas-henderson-nv": "clark",
+    "bel-air-beverly-hills-ca": "regrid",
+    "seattle-eastside-wa": "regrid",
+    "atherton-ca": "regrid",
 }
 
 

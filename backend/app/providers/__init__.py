@@ -16,6 +16,11 @@ from app.providers.miamidade import (
     MiamiDadeParcelProvider,
     ProviderUnavailableError,
 )
+from app.providers.regrid import (
+    RegridListingProvider,
+    RegridParcelProvider,
+    REGRID_MARKETS,
+)
 
 
 def get_listing_provider(name: str = "fixture") -> ListingProvider:
@@ -27,6 +32,8 @@ def get_listing_provider(name: str = "fixture") -> ListingProvider:
         return MaricopaListingProvider()
     if name in COUNTY_SOURCES:
         return CountyListingProvider(COUNTY_SOURCES[name])
+    if name == "regrid":
+        return RegridListingProvider()
     if name == "attom":
         return AttomParcelProvider()
     raise ValueError(f"Unknown listing provider '{name}'")
@@ -41,6 +48,8 @@ def get_parcel_provider(name: str = "fixture") -> ParcelProvider:
         return MaricopaParcelProvider()
     if name in COUNTY_SOURCES:
         return CountyParcelProvider(COUNTY_SOURCES[name])
+    if name == "regrid":
+        return RegridParcelProvider()
     if name == "attom":
         return AttomParcelProvider()
     raise ValueError(f"Unknown parcel provider '{name}'")
@@ -48,6 +57,9 @@ def get_parcel_provider(name: str = "fixture") -> ParcelProvider:
 
 __all__ = [
     "AttomParcelProvider",
+    "RegridParcelProvider",
+    "RegridListingProvider",
+    "REGRID_MARKETS",
     "FixtureListingProvider",
     "FixtureParcelProvider",
     "ListingProvider",
