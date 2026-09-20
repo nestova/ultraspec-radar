@@ -24,6 +24,7 @@ import type {
   Parcel,
   RunResult,
   SavedProperty,
+  SavedPropertyInput,
   SavedRun,
   SearchConfig,
 } from './types'
@@ -108,6 +109,20 @@ export default function App() {
       }
     },
     [config, refreshProperties],
+  )
+
+  const addProperty = useCallback(
+    async (input: SavedPropertyInput) => {
+      try {
+        await saveProperty(input)
+        refreshProperties()
+        return true
+      } catch (err) {
+        setError((err as Error).message)
+        return false
+      }
+    },
+    [refreshProperties],
   )
 
   const updateContacts = useCallback(async (parcelId: string, contact: ContactUpdate) => {
@@ -209,6 +224,8 @@ export default function App() {
         <div className="props-wrap">
           <PropertiesPage
             properties={properties}
+            markets={markets}
+            onAdd={addProperty}
             onUpdate={updateContacts}
             onDelete={removeProperty}
           />

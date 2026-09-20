@@ -122,14 +122,14 @@ export interface Market {
 }
 
 export interface SavedPropertyInput {
-  parcel_id: string
+  parcel_id?: string
   market: string
   address: string
-  city: string
-  state: string
-  zip_code: string
-  lat: number
-  lon: number
+  city?: string
+  state?: string
+  zip_code?: string
+  lat?: number
+  lon?: number
   year_built: number | null
   lot_size_sqft: number | null
   estimated_value: number | null

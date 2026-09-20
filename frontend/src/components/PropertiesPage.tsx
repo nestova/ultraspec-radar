@@ -1,10 +1,13 @@
 import { useState } from 'react'
 
 import { formatCurrency, formatDateTime } from '../format'
-import type { ContactUpdate, SavedProperty } from '../types'
+import { AddPropertyForm } from './AddPropertyForm'
+import type { ContactUpdate, Market, SavedProperty, SavedPropertyInput } from '../types'
 
 interface Props {
   properties: SavedProperty[]
+  markets: Market[]
+  onAdd: (input: SavedPropertyInput) => Promise<boolean>
   onUpdate: (parcelId: string, contact: ContactUpdate) => Promise<void>
   onDelete: (parcelId: string) => Promise<void>
 }
@@ -124,22 +127,27 @@ function PropertyRow({
   )
 }
 
-export function PropertiesPage({ properties, onUpdate, onDelete }: Props) {
-  if (properties.length === 0) {
-    return (
-      <div className="empty">
-        <h3>No saved properties yet</h3>
-        <p>Run a scan and hit “Save” on candidate rows to start tracking outreach contacts.</p>
-      </div>
-    )
-  }
+export function PropertiesPage({ properties, markets, onAdd, onUpdate, onDelete }: Props) {
+  const [adding, setAdding] = useState(false)
 
   return (
     <div className="props-page">
       <div className="props-head">
         <h2>Saved properties</h2>
         <small>{properties.length} tracked · contact edits save per row</small>
+        <button type="button" className="btn btn-sm" onClick={() => setAdding(true)}>
+          + Add property
+        </button>
       </div>
+      {adding && <AddPropertyForm markets={markets} onAdd={onAdd} onCancel={() => setAdding(false)} />}
+      {properties.length === 0 ? (
+        !adding && (
+          <div className="empty">
+            <h3>No saved properties yet</h3>
+            <p>Run a scan and hit “Save” on candidate rows — or add one manually with the button above.</p>
+          </div>
+        )
+      ) : (
       <div className="table-wrap">
         <table>
           <thead>
@@ -162,9 +170,12 @@ export function PropertiesPage({ properties, onUpdate, onDelete }: Props) {
           </tbody>
         </table>
       </div>
-      <small className="props-updated">
-        Last change {formatDateTime(properties[0].updated_at)}
-      </small>
+      )}
+      {properties.length > 0 && (
+        <small className="props-updated">
+          Last change {formatDateTime(properties[0].updated_at)}
+        </small>
+      )}
     </div>
   )
 }

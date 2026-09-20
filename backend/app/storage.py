@@ -100,6 +100,7 @@ def upsert_property(prop: SavedPropertyIn) -> SavedProperty:
     """Insert a saved property; re-saving the same parcel refreshes its facts
     but never touches contact details the user has entered."""
     now = datetime.now(timezone.utc).isoformat()
+    parcel_id = prop.parcel_id or f"manual-{uuid.uuid4().hex[:12]}"
     with _connect() as connection:
         connection.execute(_PROPERTIES_SCHEMA)
         connection.execute(
@@ -123,14 +124,14 @@ def upsert_property(prop: SavedPropertyIn) -> SavedProperty:
                    owner_name = excluded.owner_name,
                    waterfront = excluded.waterfront""",
             (
-                prop.parcel_id, now, now, prop.market, prop.address, prop.city,
+                parcel_id, now, now, prop.market, prop.address, prop.city,
                 prop.state, prop.zip_code, prop.lat, prop.lon, prop.year_built,
                 prop.lot_size_sqft, prop.estimated_value, prop.owner_name,
                 prop.waterfront,
             ),
         )
         row = connection.execute(
-            "SELECT * FROM properties WHERE parcel_id = ?", (prop.parcel_id,)
+            "SELECT * FROM properties WHERE parcel_id = ?", (parcel_id,)
         ).fetchone()
     return _property_from_row(row)
 

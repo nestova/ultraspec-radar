@@ -69,17 +69,62 @@
 }
 
 .props-page {
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
   min-height: 0;
   padding: 18px 24px 40px;
+}
+
+.props-page .table-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 .props-head {
   display: flex;
   align-items: baseline;
   gap: 12px;
+}
+
+.props-head .btn {
+  margin-left: auto;
+}
+
+.add-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 10px 12px;
+  padding: 14px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+}
+
+.add-field {
+  display: grid;
+  gap: 4px;
+}
+
+.add-field label {
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.add-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.add-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
 }
 
 .props-head h2 {

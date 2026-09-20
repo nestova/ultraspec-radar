@@ -83,14 +83,14 @@ class Candidate(BaseModel):
 class SavedPropertyIn(BaseModel):
     """A candidate parcel saved for tracking; contact details are added later."""
 
-    parcel_id: str
+    parcel_id: str = ""
     market: str
     address: str
-    city: str
-    state: str
-    zip_code: str
-    lat: float
-    lon: float
+    city: str = ""
+    state: str = ""
+    zip_code: str = ""
+    lat: float = 0.0
+    lon: float = 0.0
     year_built: int | None = None
     lot_size_sqft: float | None = None
     estimated_value: float | None = None
