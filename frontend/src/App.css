@@ -32,6 +32,105 @@
   font-size: var(--step-0);
 }
 
+.tabs {
+  display: flex;
+  gap: 6px;
+}
+
+.tab {
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text-muted);
+  padding: 7px 14px;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-family: var(--font-display);
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.tab:hover {
+  border-color: var(--survey);
+  background: var(--survey-soft);
+  color: var(--text);
+}
+
+.tab[aria-current='true'] {
+  background: var(--survey-soft);
+  border-color: var(--survey);
+  color: var(--text);
+}
+
+.props-wrap {
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.props-page {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 10px;
+  min-height: 0;
+  padding: 18px 24px 40px;
+}
+
+.props-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.props-head h2 {
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.props-head small,
+.props-updated {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+}
+
+.prop-sub {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+}
+
+.prop-input {
+  background: var(--ink-sunken);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  padding: 6px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  min-width: 130px;
+}
+
+.prop-input:focus {
+  outline: none;
+  border-color: var(--survey);
+}
+
+.prop-notes {
+  min-width: 180px;
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 0.68rem;
+}
+
+.row-actions {
+  display: flex;
+  gap: 6px;
+}
+
 .topbar-stats {
   display: flex;
   flex-wrap: wrap;

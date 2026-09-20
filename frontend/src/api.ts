@@ -1,4 +1,12 @@
-import type { Market, RunResult, SavedRun, SearchConfig } from './types'
+import type {
+  ContactUpdate,
+  Market,
+  RunResult,
+  SavedProperty,
+  SavedPropertyInput,
+  SavedRun,
+  SearchConfig,
+} from './types'
 
 async function parseError(response: Response): Promise<never> {
   let detail = `Request failed (${response.status})`
@@ -43,6 +51,42 @@ export async function fetchSavedRun(id: string): Promise<RunResult> {
   const response = await fetch(`/api/runs/${id}`)
   if (!response.ok) await parseError(response)
   return response.json()
+}
+
+export async function fetchProperties(): Promise<SavedProperty[]> {
+  const response = await fetch('/api/properties')
+  if (!response.ok) await parseError(response)
+  return response.json()
+}
+
+export async function saveProperty(property: SavedPropertyInput): Promise<SavedProperty> {
+  const response = await fetch('/api/properties', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(property),
+  })
+  if (!response.ok) await parseError(response)
+  return response.json()
+}
+
+export async function updatePropertyContacts(
+  parcelId: string,
+  contact: ContactUpdate,
+): Promise<SavedProperty> {
+  const response = await fetch(`/api/properties/${encodeURIComponent(parcelId)}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(contact),
+  })
+  if (!response.ok) await parseError(response)
+  return response.json()
+}
+
+export async function deleteProperty(parcelId: string): Promise<void> {
+  const response = await fetch(`/api/properties/${encodeURIComponent(parcelId)}`, {
+    method: 'DELETE',
+  })
+  if (!response.ok) await parseError(response)
 }
 
 export async function downloadCsv(config: SearchConfig): Promise<void> {

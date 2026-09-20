@@ -7,7 +7,7 @@ from app.config import SearchConfig
 from app.developers import developer_names
 from app.export import candidates_to_csv
 from app.markets import MARKETS
-from app.models import RunResult
+from app.models import ContactUpdate, RunResult, SavedProperty, SavedPropertyIn
 from app.pipeline import run_pipeline
 from app.providers import (
     MissingCredentialsError,
@@ -127,5 +127,31 @@ def saved_runs(limit: int = 50) -> list[dict]:
 def saved_run(run_id: str) -> RunResult:
     try:
         return storage.get_run(run_id)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+
+@app.get("/api/properties", response_model=list[SavedProperty])
+def properties() -> list[SavedProperty]:
+    return storage.list_properties()
+
+
+@app.post("/api/properties", response_model=SavedProperty)
+def save_property(prop: SavedPropertyIn) -> SavedProperty:
+    return storage.upsert_property(prop)
+
+
+@app.patch("/api/properties/{parcel_id}", response_model=SavedProperty)
+def update_property(parcel_id: str, contact: ContactUpdate) -> SavedProperty:
+    try:
+        return storage.update_property_contacts(parcel_id, contact)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+
+@app.delete("/api/properties/{parcel_id}", status_code=204)
+def delete_property(parcel_id: str) -> None:
+    try:
+        storage.delete_property(parcel_id)
     except KeyError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc

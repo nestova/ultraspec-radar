@@ -121,6 +121,38 @@ export interface Market {
   developers: string[]
 }
 
+export interface SavedPropertyInput {
+  parcel_id: string
+  market: string
+  address: string
+  city: string
+  state: string
+  zip_code: string
+  lat: number
+  lon: number
+  year_built: number | null
+  lot_size_sqft: number | null
+  estimated_value: number | null
+  owner_name: string | null
+  waterfront: boolean | null
+}
+
+export interface ContactUpdate {
+  contact_name: string | null
+  contact_phone: string | null
+  contact_email: string | null
+  notes: string | null
+}
+
+export interface SavedProperty extends SavedPropertyInput {
+  contact_name: string | null
+  contact_phone: string | null
+  contact_email: string | null
+  notes: string | null
+  created_at: string
+  updated_at: string
+}
+
 export interface SavedRun {
   id: string
   created_at: string

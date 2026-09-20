@@ -80,6 +80,40 @@ class Candidate(BaseModel):
     developer_matches: list[DeveloperMatch] = []
 
 
+class SavedPropertyIn(BaseModel):
+    """A candidate parcel saved for tracking; contact details are added later."""
+
+    parcel_id: str
+    market: str
+    address: str
+    city: str
+    state: str
+    zip_code: str
+    lat: float
+    lon: float
+    year_built: int | None = None
+    lot_size_sqft: float | None = None
+    estimated_value: float | None = None
+    owner_name: str | None = None
+    waterfront: bool | None = None
+
+
+class SavedProperty(SavedPropertyIn):
+    contact_name: str | None = None
+    contact_phone: str | None = None
+    contact_email: str | None = None
+    notes: str | None = None
+    created_at: datetime
+    updated_at: datetime
+
+
+class ContactUpdate(BaseModel):
+    contact_name: str | None = None
+    contact_phone: str | None = None
+    contact_email: str | None = None
+    notes: str | None = None
+
+
 class Cluster(BaseModel):
     id: str
     anchor_ids: list[str]

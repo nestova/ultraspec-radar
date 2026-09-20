@@ -1,12 +1,34 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import './App.css'
-import { downloadCsv, fetchDefaults, fetchMarkets, fetchRuns, fetchSavedRun, runSearch } from './api'
+import {
+  deleteProperty,
+  downloadCsv,
+  fetchDefaults,
+  fetchMarkets,
+  fetchProperties,
+  fetchRuns,
+  fetchSavedRun,
+  runSearch,
+  saveProperty,
+  updatePropertyContacts,
+} from './api'
 import { CandidateTable } from './components/CandidateTable'
 import { ClusterMap } from './components/ClusterMap'
 import { ControlRail } from './components/ControlRail'
+import { PropertiesPage } from './components/PropertiesPage'
 import { formatCurrency, formatDateTime } from './format'
-import type { Market, RunResult, SavedRun, SearchConfig } from './types'
+import type {
+  ContactUpdate,
+  Market,
+  Parcel,
+  RunResult,
+  SavedProperty,
+  SavedRun,
+  SearchConfig,
+} from './types'
+
+type View = 'scan' | 'properties'
 
 export default function App() {
   const [defaults, setDefaults] = useState<SearchConfig | null>(null)
@@ -17,10 +39,18 @@ export default function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [view, setView] = useState<View>('scan')
+  const [properties, setProperties] = useState<SavedProperty[]>([])
 
   const refreshRuns = useCallback(() => {
     fetchRuns()
       .then(setRuns)
+      .catch((err: Error) => setError(err.message))
+  }, [])
+
+  const refreshProperties = useCallback(() => {
+    fetchProperties()
+      .then(setProperties)
       .catch((err: Error) => setError(err.message))
   }, [])
 
@@ -33,7 +63,8 @@ export default function App() {
       })
       .catch((err: Error) => setError(err.message))
     refreshRuns()
-  }, [refreshRuns])
+    refreshProperties()
+  }, [refreshRuns, refreshProperties])
 
   const run = useCallback(
     async (next: SearchConfig) => {
@@ -66,6 +97,42 @@ export default function App() {
     }
   }, [])
 
+  const saveCandidate = useCallback(
+    async (parcel: Parcel) => {
+      if (!config) return
+      try {
+        await saveProperty({ ...parcel, market: config.market })
+        refreshProperties()
+      } catch (err) {
+        setError((err as Error).message)
+      }
+    },
+    [config, refreshProperties],
+  )
+
+  const updateContacts = useCallback(async (parcelId: string, contact: ContactUpdate) => {
+    try {
+      await updatePropertyContacts(parcelId, contact)
+      refreshProperties()
+    } catch (err) {
+      setError((err as Error).message)
+    }
+  }, [refreshProperties])
+
+  const removeProperty = useCallback(async (parcelId: string) => {
+    try {
+      await deleteProperty(parcelId)
+      refreshProperties()
+    } catch (err) {
+      setError((err as Error).message)
+    }
+  }, [refreshProperties])
+
+  const savedIds = useMemo(
+    () => new Set(properties.map((property) => property.parcel_id)),
+    [properties],
+  )
+
   const selected = useMemo(
     () => result?.clusters.find((cluster) => cluster.id === selectedId) ?? null,
     [result, selectedId],
@@ -89,6 +156,19 @@ export default function App() {
           <h1>UltraSpec Radar</h1>
           <span>New-construction clusters &amp; adjacent teardown targets</span>
         </div>
+        <nav className="tabs" aria-label="Views">
+          <button type="button" className="tab" aria-current={view === 'scan'} onClick={() => setView('scan')}>
+            Radar
+          </button>
+          <button
+            type="button"
+            className="tab"
+            aria-current={view === 'properties'}
+            onClick={() => setView('properties')}
+          >
+            Properties ({properties.length})
+          </button>
+        </nav>
         <dl className="topbar-stats">
           <div className="stat">
             <dt>Anchors</dt>
@@ -125,6 +205,15 @@ export default function App() {
         </p>
       )}
 
+      {view === 'properties' ? (
+        <div className="props-wrap">
+          <PropertiesPage
+            properties={properties}
+            onUpdate={updateContacts}
+            onDelete={removeProperty}
+          />
+        </div>
+      ) : (
       <div className="layout">
         <ControlRail
           config={config}
@@ -181,10 +270,15 @@ export default function App() {
                 </button>
               ))}
             </div>
-            <CandidateTable cluster={selected} />
+            <CandidateTable
+              cluster={selected}
+              savedIds={savedIds}
+              onSave={(parcel) => void saveCandidate(parcel)}
+            />
           </section>
         </main>
       </div>
+      )}
     </div>
   )
 }

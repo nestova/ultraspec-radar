@@ -13,7 +13,7 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
-from app.models import RunResult
+from app.models import ContactUpdate, RunResult, SavedProperty, SavedPropertyIn
 
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS runs (
@@ -27,6 +27,30 @@ CREATE TABLE IF NOT EXISTS runs (
     parcels_scanned INTEGER NOT NULL,
     candidates_returned INTEGER NOT NULL,
     result_json TEXT NOT NULL
+)
+"""
+
+_PROPERTIES_SCHEMA = """
+CREATE TABLE IF NOT EXISTS properties (
+    parcel_id TEXT PRIMARY KEY,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL,
+    market TEXT NOT NULL,
+    address TEXT NOT NULL,
+    city TEXT NOT NULL,
+    state TEXT NOT NULL,
+    zip_code TEXT NOT NULL,
+    lat REAL NOT NULL,
+    lon REAL NOT NULL,
+    year_built INTEGER,
+    lot_size_sqft REAL,
+    estimated_value REAL,
+    owner_name TEXT,
+    waterfront INTEGER,
+    contact_name TEXT,
+    contact_phone TEXT,
+    contact_email TEXT,
+    notes TEXT
 )
 """
 
@@ -64,6 +88,99 @@ def save_run(result: RunResult, listing_source: str, parcel_source: str) -> str:
             ),
         )
     return run_id
+
+
+def _property_from_row(row: sqlite3.Row) -> SavedProperty:
+    data = dict(row)
+    data["waterfront"] = bool(data["waterfront"]) if data["waterfront"] is not None else None
+    return SavedProperty.model_validate(data)
+
+
+def upsert_property(prop: SavedPropertyIn) -> SavedProperty:
+    """Insert a saved property; re-saving the same parcel refreshes its facts
+    but never touches contact details the user has entered."""
+    now = datetime.now(timezone.utc).isoformat()
+    with _connect() as connection:
+        connection.execute(_PROPERTIES_SCHEMA)
+        connection.execute(
+            """INSERT INTO properties (
+                   parcel_id, created_at, updated_at, market, address, city, state,
+                   zip_code, lat, lon, year_built, lot_size_sqft, estimated_value,
+                   owner_name, waterfront
+               ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+               ON CONFLICT(parcel_id) DO UPDATE SET
+                   updated_at = excluded.updated_at,
+                   market = excluded.market,
+                   address = excluded.address,
+                   city = excluded.city,
+                   state = excluded.state,
+                   zip_code = excluded.zip_code,
+                   lat = excluded.lat,
+                   lon = excluded.lon,
+                   year_built = excluded.year_built,
+                   lot_size_sqft = excluded.lot_size_sqft,
+                   estimated_value = excluded.estimated_value,
+                   owner_name = excluded.owner_name,
+                   waterfront = excluded.waterfront""",
+            (
+                prop.parcel_id, now, now, prop.market, prop.address, prop.city,
+                prop.state, prop.zip_code, prop.lat, prop.lon, prop.year_built,
+                prop.lot_size_sqft, prop.estimated_value, prop.owner_name,
+                prop.waterfront,
+            ),
+        )
+        row = connection.execute(
+            "SELECT * FROM properties WHERE parcel_id = ?", (prop.parcel_id,)
+        ).fetchone()
+    return _property_from_row(row)
+
+
+def list_properties() -> list[SavedProperty]:
+    with _connect() as connection:
+        connection.execute(_PROPERTIES_SCHEMA)
+        rows = connection.execute(
+            "SELECT * FROM properties ORDER BY created_at DESC"
+        ).fetchall()
+    return [_property_from_row(row) for row in rows]
+
+
+def update_property_contacts(parcel_id: str, contact: ContactUpdate) -> SavedProperty:
+    with _connect() as connection:
+        connection.execute(_PROPERTIES_SCHEMA)
+        row = connection.execute(
+            "SELECT * FROM properties WHERE parcel_id = ?", (parcel_id,)
+        ).fetchone()
+        if row is None:
+            raise KeyError(f"No saved property '{parcel_id}'.")
+        merged = {
+            field: getattr(contact, field)
+            if getattr(contact, field) is not None
+            else row[field]
+            for field in ("contact_name", "contact_phone", "contact_email", "notes")
+        }
+        connection.execute(
+            "UPDATE properties SET contact_name = ?, contact_phone = ?,"
+            " contact_email = ?, notes = ?, updated_at = ? WHERE parcel_id = ?",
+            (
+                merged["contact_name"], merged["contact_phone"],
+                merged["contact_email"], merged["notes"],
+                datetime.now(timezone.utc).isoformat(), parcel_id,
+            ),
+        )
+        row = connection.execute(
+            "SELECT * FROM properties WHERE parcel_id = ?", (parcel_id,)
+        ).fetchone()
+    return _property_from_row(row)
+
+
+def delete_property(parcel_id: str) -> None:
+    with _connect() as connection:
+        connection.execute(_PROPERTIES_SCHEMA)
+        cursor = connection.execute(
+            "DELETE FROM properties WHERE parcel_id = ?", (parcel_id,)
+        )
+    if cursor.rowcount == 0:
+        raise KeyError(f"No saved property '{parcel_id}'.")
 
 
 def list_runs(limit: int = 50) -> list[dict]:

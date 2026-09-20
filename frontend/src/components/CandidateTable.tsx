@@ -1,11 +1,13 @@
-import type { Cluster } from '../types'
+import type { Cluster, Parcel } from '../types'
 import { formatCurrency, formatFeet, formatNumber } from '../format'
 
 interface Props {
   cluster: Cluster | null
+  savedIds: Set<string>
+  onSave: (parcel: Parcel) => void
 }
 
-export function CandidateTable({ cluster }: Props) {
+export function CandidateTable({ cluster, savedIds, onSave }: Props) {
   if (!cluster) {
     return (
       <div className="empty">
@@ -45,6 +47,7 @@ export function CandidateTable({ cluster }: Props) {
             <th scope="col">Developer fit</th>
             <th scope="col">Parcel</th>
             <th scope="col">Records</th>
+            <th scope="col">Track</th>
           </tr>
         </thead>
         <tbody>
@@ -95,6 +98,16 @@ export function CandidateTable({ cluster }: Props) {
                     </a>
                   </>
                 )}
+              </td>
+              <td>
+                <button
+                  type="button"
+                  className="btn btn-sm"
+                  disabled={savedIds.has(candidate.parcel.parcel_id)}
+                  onClick={() => onSave(candidate.parcel)}
+                >
+                  {savedIds.has(candidate.parcel.parcel_id) ? 'Saved' : 'Save'}
+                </button>
               </td>
             </tr>
           ))}
