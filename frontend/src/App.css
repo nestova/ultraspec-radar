@@ -73,7 +73,9 @@
   flex-direction: column;
   gap: 10px;
   min-height: 0;
+  height: 100%;
   padding: 18px 24px 40px;
+  box-sizing: border-box;
 }
 
 .props-page .table-wrap {
