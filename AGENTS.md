@@ -12,9 +12,21 @@ docker compose -f docker-compose.base44.yml up -d --build
 Frontend health: `http://localhost:3000/` · Backend health: `http://localhost:8000/api/health`
 
 ## Credentials
-None required to boot. The default data provider (`fixture`) reads an offline synthetic dataset
-(`backend/data/miami-dade-fl.json`). `ATTOM_API_KEY` is only for the licensed production path, which
-is a placeholder that raises `NotImplementedError` — do not generate a placeholder for it.
+- `TRACERFY_API_KEY` (optional) — Tracerfy MCP connector token. Generate it in your Tracerfy
+  profile → Connect via MCP; the value can be the full connector URL or just the token. Wired into
+  the backend via `env_file: /run/base44/app.env`. Each pipeline run costs Tracerfy credits (5 per
+  row): 50 anchors + 50 parcels = 500 credits.
+- The default `fixture` provider needs no credentials and reads an offline synthetic dataset
+  (`backend/data/miami-dade-fl.json`).
+
+## Tracerfy MCP provider
+`app/providers/tracerfy.py` implements both `ListingProvider` and `ParcelProvider` by calling the
+Tracerfy MCP server (`https://mcp.tracerfy.com/u/<token>/mcp`) via a minimal MCP client
+(`app/providers/mcp_client.py`) built on httpx — the official `mcp` package conflicts with
+FastAPI's starlette pin. The lead builder is async (execute → poll → fetch rows); parcels are
+fetched once per market and cached, then filtered by haversine distance. Use it by passing
+`listing_source=tracerfy&parcel_source=tracerfy` to the run endpoints. Market-to-geography mappings
+live in `MARKET_GEOGRAPHY` in `tracerfy.py`.
 
 ## Key conventions
 - Every pipeline threshold is a request parameter (`app/config.py`), never a constant.

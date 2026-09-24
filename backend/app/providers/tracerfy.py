@@ -24,7 +24,7 @@ MCP_URL_TEMPLATE = "https://mcp.tracerfy.com/u/{token}/mcp"
 
 # Market ID → Tracerfy geography selector (lead-builder ``geography`` param).
 MARKET_GEOGRAPHY: dict[str, dict] = {
-    "miami-dade-fl": {"mode": "counties", "counties": ["Miami-Dade County, FL"]},
+    "miami-dade-fl": {"mode": "counties", "counties": ["Miami-Dade County"], "states": ["FL"]},
 }
 
 # Broad filters for the candidate-parcel fetch.  The pipeline applies its own
@@ -51,7 +51,12 @@ class TracerfyProvider:
                 "TRACERFY_API_KEY is not set. Generate a connector token in your "
                 "Tracerfy profile → Connect via MCP and add it as TRACERFY_API_KEY."
             )
-        self._client = MCPClient(MCP_URL_TEMPLATE.format(token=token))
+        # Accept either the bare token or the full connector URL.
+        if token.startswith("http"):
+            server_url = token
+        else:
+            server_url = MCP_URL_TEMPLATE.format(token=token)
+        self._client = MCPClient(server_url)
         self._parcel_cache: dict[str, list[Parcel]] = {}
 
     # -- helpers ------------------------------------------------------------
@@ -121,7 +126,7 @@ class TracerfyProvider:
     def fetch_anchors(self, market: str, min_price: float, min_year_built: int) -> list[AnchorHome]:
         geography = self._geography(market)
         filters = {"value_min": min_price, "year_built_min": min_year_built}
-        rows = self._build_lead_list(geography, filters, count=500, name="UltraSpec Anchors")
+        rows = self._build_lead_list(geography, filters, count=50, name="UltraSpec Anchors")
 
         anchors: list[AnchorHome] = []
         for row in rows:
@@ -165,7 +170,7 @@ class TracerfyProvider:
     def fetch_parcels_near(self, market: str, lat: float, lon: float, radius_ft: float) -> list[Parcel]:
         if market not in self._parcel_cache:
             geography = self._geography(market)
-            rows = self._build_lead_list(geography, _PARCEL_FILTERS, count=500, name="UltraSpec Candidates")
+            rows = self._build_lead_list(geography, _PARCEL_FILTERS, count=50, name="UltraSpec Candidates")
             self._parcel_cache[market] = [self._row_to_parcel(row) for row in rows if self._has_coords(row)]
 
         return [
