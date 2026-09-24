@@ -105,7 +105,9 @@ class MCPClient:
         result = msg.get("result", {})
         if result.get("isError"):
             content = result.get("content", [])
-            text = next((c.get("text", "") for c in content if c.get("type") == "text"), "unknown error")
+            text = next((c.get("text", "") for c in content if c.get("type") == "text"), "")
+            if not text:
+                text = f"unknown error (result={json.dumps(result)})"
             raise RuntimeError(f"MCP tool '{name}' returned an error: {text}")
         content = result.get("content", [])
         for item in content:

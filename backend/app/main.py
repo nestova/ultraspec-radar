@@ -51,6 +51,8 @@ def _run(config: SearchConfig, listing_source: str, parcel_source: str) -> RunRe
         raise HTTPException(status_code=503, detail=str(exc)) from exc
     except (NotImplementedError, ValueError) as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
 
 
 @app.post("/api/run", response_model=RunResult)
