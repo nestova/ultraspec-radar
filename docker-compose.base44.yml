@@ -4,9 +4,9 @@ services:
     working_dir: /app/backend
     volumes:
       - ./backend:/app/backend
+    env_file:
+      - /run/base44/app.env
     environment:
-      # Fixture provider works offline; ATTOM is a placeholder that raises
-      # NotImplementedError until a license is provisioned, so no key is needed to boot.
       - PYTHONUNBUFFERED=1
     command: sh -c "pip install --quiet -r requirements.txt && python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000"
     healthcheck:
