@@ -80,13 +80,13 @@ def skip_trace(req: SkipTraceRequest) -> OwnerContact:
 
 
 @app.post("/api/run", response_model=RunResult)
-def run(config: SearchConfig, listing_source: str = "fixture", parcel_source: str = "fixture") -> RunResult:
+def run(config: SearchConfig, listing_source: str = "miami-dade", parcel_source: str = "miami-dade") -> RunResult:
     return _run(config, listing_source, parcel_source)
 
 
 @app.post("/api/run/export.csv", response_class=PlainTextResponse)
 def run_export(
-    config: SearchConfig, listing_source: str = "fixture", parcel_source: str = "fixture"
+    config: SearchConfig, listing_source: str = "miami-dade", parcel_source: str = "miami-dade"
 ) -> PlainTextResponse:
     csv_text = candidates_to_csv(_run(config, listing_source, parcel_source))
     return PlainTextResponse(

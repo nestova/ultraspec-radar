@@ -5,16 +5,21 @@ from app.providers.fixture import (
     FixtureParcelProvider,
     available_markets,
 )
+from app.providers.miami_dade import MiamiDadeListingProvider, MiamiDadeParcelProvider
 from app.providers.tracerfy import TracerfyProvider
 
 
-def get_listing_provider(name: str = "fixture") -> ListingProvider:
+def get_listing_provider(name: str = "miami-dade") -> ListingProvider:
+    if name == "miami-dade":
+        return MiamiDadeListingProvider()
     if name == "fixture":
         return FixtureListingProvider()
     raise ValueError(f"Unknown listing provider '{name}'")
 
 
-def get_parcel_provider(name: str = "fixture") -> ParcelProvider:
+def get_parcel_provider(name: str = "miami-dade") -> ParcelProvider:
+    if name == "miami-dade":
+        return MiamiDadeParcelProvider()
     if name == "fixture":
         return FixtureParcelProvider()
     raise ValueError(f"Unknown parcel provider '{name}'")
@@ -31,6 +36,8 @@ __all__ = [
     "FixtureListingProvider",
     "FixtureParcelProvider",
     "ListingProvider",
+    "MiamiDadeListingProvider",
+    "MiamiDadeParcelProvider",
     "MissingCredentialsError",
     "ParcelProvider",
     "SkipTraceProvider",
