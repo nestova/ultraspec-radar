@@ -1,16 +1,18 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse
+from pydantic import BaseModel
 
 from app.config import SearchConfig
 from app.export import candidates_to_csv
-from app.models import RunResult
+from app.models import OwnerContact, RunResult
 from app.pipeline import run_pipeline
 from app.providers import (
     MissingCredentialsError,
     available_markets,
     get_listing_provider,
     get_parcel_provider,
+    get_skip_trace_provider,
 )
 
 app = FastAPI(title="UltraSpec Radar", version="0.1.0")
@@ -51,16 +53,40 @@ def _run(config: SearchConfig, listing_source: str, parcel_source: str) -> RunRe
         raise HTTPException(status_code=503, detail=str(exc)) from exc
     except (NotImplementedError, ValueError) as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+
+
+class SkipTraceRequest(BaseModel):
+    parcel_id: str | None = None
+    address: str
+    city: str
+    state: str
+    zip_code: str = ""
+
+
+@app.post("/api/skip-trace", response_model=OwnerContact)
+def skip_trace(req: SkipTraceRequest) -> OwnerContact:
+    """Skip trace a property address to get the owner's phone numbers and emails."""
+    try:
+        provider = get_skip_trace_provider("tracerfy")
+        contact = provider.skip_trace(req.address, req.city, req.state, req.zip_code)
+        contact.parcel_id = req.parcel_id
+        return contact
+    except MissingCredentialsError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
 
 
 @app.post("/api/run", response_model=RunResult)
-def run(config: SearchConfig, listing_source: str = "fixture", parcel_source: str = "fixture") -> RunResult:
+def run(config: SearchConfig, listing_source: str = "miami-dade", parcel_source: str = "miami-dade") -> RunResult:
     return _run(config, listing_source, parcel_source)
 
 
 @app.post("/api/run/export.csv", response_class=PlainTextResponse)
 def run_export(
-    config: SearchConfig, listing_source: str = "fixture", parcel_source: str = "fixture"
+    config: SearchConfig, listing_source: str = "miami-dade", parcel_source: str = "miami-dade"
 ) -> PlainTextResponse:
     csv_text = candidates_to_csv(_run(config, listing_source, parcel_source))
     return PlainTextResponse(

@@ -104,6 +104,13 @@ export interface RunResult {
   clusters: Cluster[]
 }
 
+export interface OwnerContact {
+  parcel_id: string | null
+  owner_name: string | null
+  phones: string[]
+  emails: string[]
+}
+
 export interface Market {
   id: string
   label: string

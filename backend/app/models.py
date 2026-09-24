@@ -96,3 +96,12 @@ class RunSummary(BaseModel):
 class RunResult(BaseModel):
     summary: RunSummary
     clusters: list[Cluster]
+
+
+class OwnerContact(BaseModel):
+    """Skip-traced contact info for a property owner."""
+
+    parcel_id: str | None = None
+    owner_name: str | None = None
+    phones: list[str] = []
+    emails: list[str] = []

@@ -124,7 +124,7 @@
   display: grid;
   gap: 8px;
   position: sticky;
-  bottom: -20px;
+  bottom: 0;
   margin-top: auto;
   background: var(--ink-raised);
   border-top: 1px solid var(--rule);
@@ -332,6 +332,39 @@ tbody tr:hover {
 .tag-review {
   border-color: var(--flag);
   color: var(--flag);
+}
+
+.skip-trace-btn {
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: transparent;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.skip-trace-btn:hover:not(:disabled) {
+  border-color: var(--survey);
+  background: var(--survey-soft);
+}
+
+.skip-trace-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.skip-trace-error {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.7rem;
+  color: var(--flag);
+  max-width: 200px;
+  white-space: normal;
 }
 
 .notice {
