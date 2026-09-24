@@ -87,6 +87,22 @@ class MCPClient:
         self._initialized = True
         logger.info("MCP session initialized with %s", self._url)
 
+    def list_tools(self) -> list[dict]:
+        """Return available MCP tools (metadata only — does NOT execute or cost credits)."""
+        self.initialize()
+        msg = self._post(
+            {
+                "jsonrpc": "2.0",
+                "id": self._next_id(),
+                "method": "tools/list",
+                "params": {},
+            }
+        )
+        if not msg:
+            return []
+        result = msg.get("result", {})
+        return result.get("tools", [])
+
     def call_tool(self, name: str, arguments: dict | None = None) -> object:
         """Call an MCP tool and return its parsed result (JSON object or plain text)."""
         self.initialize()

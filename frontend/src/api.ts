@@ -1,4 +1,4 @@
-import type { Market, RunResult, SearchConfig } from './types'
+import type { Market, OwnerContact, RunResult, SearchConfig } from './types'
 
 async function parseError(response: Response): Promise<never> {
   let detail = `Request failed (${response.status})`
@@ -28,6 +28,28 @@ export async function runSearch(config: SearchConfig): Promise<RunResult> {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(config),
+  })
+  if (!response.ok) await parseError(response)
+  return response.json()
+}
+
+export async function skipTrace(
+  parcelId: string | null,
+  address: string,
+  city: string,
+  state: string,
+  zipCode: string,
+): Promise<OwnerContact> {
+  const response = await fetch('/api/skip-trace', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      parcel_id: parcelId,
+      address,
+      city,
+      state,
+      zip_code: zipCode,
+    }),
   })
   if (!response.ok) await parseError(response)
   return response.json()

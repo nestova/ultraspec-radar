@@ -19,14 +19,13 @@ Frontend health: `http://localhost:3000/` · Backend health: `http://localhost:8
 - The default `fixture` provider needs no credentials and reads an offline synthetic dataset
   (`backend/data/miami-dade-fl.json`).
 
-## Tracerfy MCP provider
-`app/providers/tracerfy.py` implements both `ListingProvider` and `ParcelProvider` by calling the
-Tracerfy MCP server (`https://mcp.tracerfy.com/u/<token>/mcp`) via a minimal MCP client
-(`app/providers/mcp_client.py`) built on httpx — the official `mcp` package conflicts with
-FastAPI's starlette pin. The lead builder is async (execute → poll → fetch rows); parcels are
-fetched once per market and cached, then filtered by haversine distance. Use it by passing
-`listing_source=tracerfy&parcel_source=tracerfy` to the run endpoints. Market-to-geography mappings
-live in `MARKET_GEOGRAPHY` in `tracerfy.py`.
+## Tracerfy MCP provider (skip trace only)
+`app/providers/tracerfy.py` implements `SkipTraceProvider` — it calls the Tracerfy MCP server's
+`trace_lookup` tool to retrieve owner phone numbers and email addresses for a property address.
+It does NOT fetch property data; the fixture provider supplies anchors and parcels. The MCP
+client (`app/providers/mcp_client.py`) is built on httpx — the official `mcp` package conflicts
+with FastAPI's starlette pin. Call it via `POST /api/skip-trace` with `{address, city, state,
+zip_code}`. Tracerfy bills credits per hit; a miss costs nothing.
 
 ## Key conventions
 - Every pipeline threshold is a request parameter (`app/config.py`), never a constant.
